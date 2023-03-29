@@ -520,12 +520,16 @@ const machine = {
     pre: (material, process, container) => machining(material, process, (model) => $(container).prepend(model)),
     re: (material, process) => machining(material, process, (model) => $(material).html(model))
 }
-
-$('head').append(btForumStyle);
-$('body').append('<img src="https://www.masiro.me/masiroImg/logo-small.ico" id="magic-btn">');
-$('#app').append('<div class="forum" next="1"></div>');
-preload();
-$('#magic-btn').on('click', _ => gogogo());
+$(()=>{
+  if(document.URL.indexOf('forum_id=')<0){
+    return false;
+  }
+  $('head').append(btForumStyle);
+  $('body').append('<img src="https://www.masiro.me/masiroImg/logo-small.ico" id="magic-btn">');
+  $('#app').append('<div class="forum" next="1"></div>');
+  preload();
+  $('#magic-btn').on('click', _ => gogogo());
+});
 
 function gogogo() {
     if (localStorage.getItem('forumStyle') == 'new') {
