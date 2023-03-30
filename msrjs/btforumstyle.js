@@ -578,8 +578,8 @@ const btForumHtml=`<div class="forum-head">
     </div>
     <div class="forum-other">
       <div class="forum-interact">
-        <div><f>评论</f><f>50</f></div>
-        <div><f>浏览</f><f>248</f></div>
+        <div><f class="forum-reply">评论</f><f>∞</f></div>
+        <div><f class="forum-read">浏览</f><f>∞</f></div>
       </div>
     </div>
     <div class="forum-tip"></div>
@@ -598,8 +598,8 @@ const btForumHtml=`<div class="forum-head">
     </div>
     <div class="forum-other">
       <div class="forum-interact">
-        <div><f>评论</f><f>92</f></div>
-        <div><f>浏览</f><f>4967</f></div>
+        <div><f class="forum-reply">评论</f><f>∞</f></div>
+        <div><f class="forum-read">浏览</f><f>∞</f></div>
       </div>
     </div>
     <div class="forum-tip"></div>
@@ -618,13 +618,16 @@ const btForumHtml=`<div class="forum-head">
     </div>
     <div class="forum-other">
       <div class="forum-interact">
-        <div><f>评论</f><f>163</f></div>
-        <div><f>浏览</f><f>6074</f></div>
+        <div><f class="forum-reply">评论</f><f>∞</f></div>
+        <div><f class="forum-read">浏览</f><f>∞</f></div>
       </div>
     </div>
     <div class="forum-tip"></div>
   </div>
 </div>
+
+<input type="radio" id="p-normal" name="post" checked>
+<input type="radio" id="p-good" name="post">
 
 <div class="forum-action">
   <div class="forum-sort">
@@ -633,7 +636,7 @@ const btForumHtml=`<div class="forum-head">
       <label for="p-good">精华</label>
     </div>
     <div class="forum-search">
-      <input id="forum-search" type="text" placeholder="帖名/用户" />
+      <input id="forum-search" type="text" placeholder="搜索功能未完成w" />
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="  width: 30px;height: 30px;">
         <path d="M0 0h512v512H0z" fill="#000000" fill-opacity="0"></path>
         <g transform="translate(0,0)">
@@ -648,15 +651,13 @@ const btForumHtml=`<div class="forum-head">
   <div class="forum-new" onclick="$('.post-btn').click()">发布新帖子</div>
 </div>
 
-<input type="radio" id="p-normal" name="post" checked>
 <div class="forum-posts" good="0" page="1"></div>
-<input type="radio" id="p-good" name="post">
 <div class="forum-posts" good="1" page="1"></div>
 
 <div class="forum-more">
-  <f>没有上一页</f>
-  <n>1</n>
-  <f>下一页</f>
+  <f onclick="changePage(Number($('.forum-more>n').text())-1)" style="visibility:hidden">上一页</f>
+  <n style="display:none">1</n>
+  <f onclick="changePage(Number($('.forum-more>n').text())+1)">下一页</f>
 </div>
 
 <div style="display:none">
@@ -673,8 +674,8 @@ const btForumHtml=`<div class="forum-head">
       </div>
       <div class="forum-other">
         <div class="forum-interact">
-          <div><f>评论</f><f>{{reply}}</f></div>
-          <div><f>浏览</f><f>{{read}}</f></div>
+          <div><f class="forum-reply">评论</f><f>{{reply}}</f></div>
+          <div><f class="forum-read">浏览</f><f>{{read}}</f></div>
         </div>
       </div>
       <div class="forum-tip"></div>
@@ -698,128 +699,123 @@ $(()=>{
 });
 
 function gogogo() {
-    if (localStorage.getItem('forumStyle') == 'new') {
-        localStorage.setItem('forumStyle', 'old');
-        switchIt(false);
-    }
-    else {
-        localStorage.setItem('forumStyle', 'new');
-        if (!$('.forum-posts').html()) {
-            working();
-            $('.load-more').click();
-            $('.refiny-load-more').click();
-        };
-        switchIt(true);
-    }
+  if (localStorage.getItem('forumStyle') == 'new') {
+    localStorage.setItem('forumStyle', 'old');
+    switchIt(false);
+  }
+  else {
+    localStorage.setItem('forumStyle', 'new');
+    if (!$('.forum-posts').html()) {
+      working();
+      $('.load-more').click();
+      $('.refiny-load-more').click();
+    };
+    switchIt(true);
+  }
 }
 async function machining(material, process, callback) {
-    let model = $(material).html();
-    for (let steps in process) model = model.replaceAll(`{{${steps}}}`, process[steps]);
-    await callback(model);
+  let model = $(material).html();
+  for (let steps in process) model = model.replaceAll(`{{${steps}}}`, process[steps]);
+  await callback(model);
 }
 function getForumHead() {
-    let info = $('.follow-info').text();
-    info = info.slice(0, info.indexOf('阅读') + 2);
-    return {
-        cover: $('.cover img').attr('src'),
-        info: info,
-        name: $('.forum-title ').text(),
-        follow: $('.follow-btn').css('display') == 'none' ? '已关注' : '关注',
-        followBtn: $('.follow-btn').css('display') == 'none' ? '.unfollow-btn' : '.follow-btn'
-    }
-    //暂且不需要获取置顶，暂且不会变更
+  let info = $('.follow-info').text();
+  info = info.slice(0, info.indexOf('阅读') + 2);
+  return {
+    cover: $('.cover img').attr('src'),
+    info: info,
+    name: $('.forum-title ').text(),
+    follow: $('.follow-btn').css('display') == 'none' ? '已关注' : '关注',
+    followBtn: $('.follow-btn').css('display') == 'none' ? '.unfollow-btn' : '.follow-btn'
+  }
+  //暂且不需要获取置顶，暂且不会变更
 }
 function getPostInfo(i, post, good) {
-    let info = {
-        name: '.user-name',
-        time: '.time',
-        lv: '.user-lev',
-        tag: '.post-tag',
-        title: '.post-content>b',
-        detail: '.content-text',
-        coin: '.post-footer>span',
-        reply: '.fa-comment-o',
-        read: '.fa-book'
-    }
-    for (let i in info) info[i] = post.find(info[i]).text();
-    info.reply = info.reply.slice(3).slice(0, -1);
-    info.read = info.read.slice(3).slice(0, -1);
-    info.good = post.find('.lanren1').length;
-    info.href = $(good ? '.refiny-post-all>.post-box>a' : '.post-all>a').eq(i).attr('href');
-    info.avatar = post.find('.head-pic').attr('src');
-    return info;
-}
-function loadCss(href) {
-    let css = document.createElement('link');
-    css.rel = 'stylesheet';
-    css.type = 'text/css';
-    css.href = href;
-    $('head').append(css);
+  let info = {
+    name: '.user-name',
+    time: '.time',
+    lv: '.user-lev',
+    tag: '.post-tag',
+    title: '.post-content>b',
+    detail: '.content-text',
+    coin: '.post-footer>span',
+    reply: '.fa-comment-o',
+    read: '.fa-book'
+  }
+  for (let i in info) info[i] = post.find(info[i]).text();
+  let sUserAgent = navigator.userAgent;
+  if (sUserAgent.indexOf('Android') > -1 || sUserAgent.indexOf('iPhone') > -1 || sUserAgent.indexOf('iPad') > -1 || sUserAgent.indexOf('iPod') > -1 || sUserAgent.indexOf('Symbian') > -1) {
+    info.coin = info.coin.slice(info.coin.indexOf('P'));
+  }
+  info.reply = info.reply.slice(3).slice(0, -1);
+  info.read = info.read.slice(3).slice(0, -1);
+  info.good = post.find('.lanren1').length;
+  info.href = $(good ? '.refiny-post-all>.post-box>a' : '.post-all>a').eq(i).attr('href');
+  info.avatar = post.find('.head-pic').attr('src');
+  return info;
 }
 function working() {
-    machine.re('.forum-head', getForumHead());
-    $('.post-all .post-box').each((i, p) => machine.add('[sample="post"]', getPostInfo(i, $(p)), '.forum-posts[good="0"]'));
-    $('.refiny-post-all .post-box').each((i, p) => machine.add('[sample="post"]', getPostInfo(i, $(p), !0), '.forum-posts[good="1"]'));
+  machine.re('.forum-head', getForumHead());
+  $('.post-all .post-box').each((i, p) => machine.add('[sample="post"]', getPostInfo(i, $(p)), '.forum-posts[good="0"]'));
+  $('.refiny-post-all .post-box').each((i, p) => machine.add('[sample="post"]', getPostInfo(i, $(p), !0), '.forum-posts[good="1"]'));
 }
 function switchIt(i) {
-    if (i) {
-        $('.post-btn').fadeOut(250);
-        $('#forum-head').fadeOut(250);
-        $('#forum-body').fadeOut(250, _ => {
-            $('.content').css('cssText', 'padding:0 !important');
-            $('.content').css('min-height', 0);
-            $('.forum').fadeIn(250);
-        });
-    }
-    else {
-        $('.forum').fadeOut(250, _ => {
-            $('.content').css('cssText', '');
-            $('.content').css('min-height', '');
-            $('.post-btn').fadeIn(250);
-            $('#forum-head').fadeIn(250);
-            $('#forum-body').fadeIn(250);
-        });
-    }
+  if (i) {
+    $('.post-btn').fadeOut(250);
+    $('#forum-head').fadeOut(250);
+    $('#forum-body').fadeOut(250, _ => {
+      $('.content').css('cssText', 'padding:0 !important');
+      $('.content').css('min-height', 0);
+      $('.forum').fadeIn(250);
+    });
+  }
+  else {
+    $('.forum').fadeOut(250, _ => {
+      $('.content').css('cssText', '');
+      $('.content').css('min-height', '');
+      $('.post-btn').fadeIn(250);
+      $('#forum-head').fadeIn(250);
+      $('#forum-body').fadeIn(250);
+    });
+  }
 }
 function followDown() {
-    let state = $('.follow-btn').css('display');
-    let timer = setInterval(_ => ($('.follow-btn').css('display') != state) ? followChange(clearInterval(timer)) : state = $('.follow-btn').css('display'), 100);
+  let state = $('.follow-btn').css('display');
+  let timer = setInterval(_ => ($('.follow-btn').css('display') != state) ? followChange(clearInterval(timer)) : state = $('.follow-btn').css('display'), 100);
 }
 function followChange() {
-    $('.forum-option>f').eq(0).text($('.forum-option>f').eq(0).text() == '关注' ? '已关注' : '关注');
-    $('.forum-option>f').eq(0).attr('onclick', $('.forum-option>f').eq(0).attr('onclick') == "$('.follow-btn').click()" ? "$('.unfollow-btn').click()" : "$('.follow-btn').click()");
+  $('.forum-option>f').eq(0).text($('.forum-option>f').eq(0).text() == '关注' ? '已关注' : '关注');
+  $('.forum-option>f').eq(0).attr('onclick', $('.forum-option>f').eq(0).attr('onclick') == "$('.follow-btn').click()" ? "$('.unfollow-btn').click()" : "$('.follow-btn').click()");
 }
 function changePage(n) {
-    let p = ($('.forum-posts[good="0"]').css('display') == 'block') ? '.forum-posts[good="0"]' : '.forum-posts[good="1"]';
-    let t = ($('.forum-posts[good="0"]').css('display') == 'block') ? '.post-all .post-box' : '.refiny-post-all .post-box';
-    let page = Number($(p).attr('page'));
-    if (page + n > 0 && $('.forum').attr('next') == 1) {
-        page += n;
-        $('.forum').attr('next', 0);
-        setTimeout(_ => $('.forum').attr('next', 1), 1000);
-        if ($(t).length < page * 10) {
-            $('.forum-more>f').attr('onclick', '');
-            $('.forum-more>f').eq(1).css('cursor', 'wait');
-            let nextpage = setInterval(_ => {
-                if ($(t).length >= page * 10) {
-                    clearInterval(nextpage);
-                    changePage(n);
-                    $('.forum-more>f').eq(0).attr('onclick', 'changePage(-1)');
-                    $('.forum-more>f').eq(1).attr('onclick', 'changePage(1)');
-                    $('.forum-more>f').eq(1).css('cursor', 'pointer');
-                }
-            }, 100);
+  let p = ($('.forum-posts[good="0"]').css('display') == 'block') ? '.forum-posts[good="0"]' : '.forum-posts[good="1"]';
+  let t = ($('.forum-posts[good="0"]').css('display') == 'block') ? '.post-all .post-box' : '.refiny-post-all .post-box';
+  if (n > 0 && $('.forum').attr('next') == 1) {
+    $('.forum').attr('next', 0);
+    setTimeout(_ => $('.forum').attr('next', 1), 700);
+    if ($(t).length < n * 10) {
+      $('.forum-more>f').attr('onclick', '');
+      $('.forum-more>f').eq(1).css('cursor', 'wait');
+      let nextpage = setInterval(_ => {
+        if ($(t).length >= n * 10) {
+          clearInterval(nextpage);
+          changePage(n);
+          $('.forum-more>f').eq(0).attr('onclick', "changePage(Number($('.forum-more>n').text())-1)");
+          $('.forum-more>f').eq(1).attr('onclick', "changePage(Number($('.forum-more>n').text())+1)");
+          $('.forum-more>f').eq(1).css('cursor', 'pointer');
         }
-        else {
-            $(p).html('');
-            $(p).attr('page', page);
-            $('.forum-more>f').eq(0).text((page == 1)?'没有上一页':'上一页');
-            let good = ($('.forum-posts[good="1"]').css('display') == 'block');
-            for (let i = page * 10 - 10; i < page * 10; i++) machine.add('[sample="post"]', getPostInfo(i, $(t).eq(i), good), p);
-            good ? $('.refiny-load-more').click() : $('.load-more').click();
-            $('.forum-more>n').text(page);
-        }
+      }, 100);
     }
+    else {
+      $(p).html('');
+      $(p).attr('page', n);
+      $('.forum-more>f').eq(0).css('visibility', (n == 1) ? 'hidden' : 'visible');
+      let good = ($('.forum-posts[good="1"]').css('display') == 'block');
+      for (let i = n * 10 - 10; i < n * 10; i++) machine.add('[sample="post"]', getPostInfo(i, $(t).eq(i), good), p);
+      good ? $('.refiny-load-more').click() : $('.load-more').click();
+      $('.forum-more>n').text(n);
+    }
+  }
 }
 $('.forum-more>f').eq(0).click(function() {
     changePage(-1);
@@ -828,25 +824,14 @@ $('.forum-more>f').eq(1).click(function() {
     changePage(1);
 });
 function preload() {
-    $('.forum').html(btForumHtml);
-    if (localStorage.getItem('forumStyle') == 'new') {
-        working();
-        switchIt(true);
-        $('.load-more').click();
-        $('.refiny-load-more').click();
-    }
-    $('.unfollow-btn').on('click', _ => followDown());
-    $('.follow-btn').on('click', _ => followDown());
-    $('.forum-type').on('click', _ => $('.forum-more>n').text($(($('.forum-posts[good="0"]').css('display') != 'block') ? '.forum-posts[good="0"]' : '.forum-posts[good="1"]').attr('page')));
-    if ($('.forum-posts[good="0"]').css('display') == 'block') {
-        Number($('.forum-posts[good="0"]').attr('page')) * 10
-    }
-    $('.forum-more>f').eq(1).hover(_ => {
-        let p = ($('.forum-posts[good="0"]').css('display') == 'block') ? '.forum-posts[good="0"]' : '.forum-posts[good="1"]';
-        let t = ($('.forum-posts[good="0"]').css('display') == 'block') ? '.post-all .post-box' : '.refiny-post-all .post-box';
-        window.nexttt = setInterval(_ => $('.forum-more>f').eq(1).text((Number($(p).attr('page')) * 10 == $(t).length) ? '载入中...' : '下一页'), 100);
-    }, _ => {
-        $('.forum-more>f').eq(1).text('下一页');
-        clearInterval(window.nexttt);
-    });
+  $('.forum').html(btForumHtml);
+  if (localStorage.getItem('forumStyle') == 'new') {
+    working();
+    switchIt(true);
+    $('.load-more').click();
+    $('.refiny-load-more').click();
+  }
+  $('.unfollow-btn').on('click', _ => followDown());
+  $('.follow-btn').on('click', _ => followDown());
+  $('.forum-type').on('click', _ => $('.forum-more>n').text($(($('.forum-posts[good="0"]').css('display') != 'block') ? '.forum-posts[good="0"]' : '.forum-posts[good="1"]').attr('page')));
 }
