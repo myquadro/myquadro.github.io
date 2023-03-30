@@ -1,3 +1,13 @@
+// ==UserScript==
+// @name         bt论坛样式
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        https://masiro.me/admin/forum?forum_id=*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=masiro.me
+// @grant        none
+// ==/UserScript==
 const btForumStyle=`<style>.forum {
   padding-top: 20px;
   display: none;
@@ -390,73 +400,73 @@ input[type="radio"] {
         --width: 100%;
         padding: 20px 5px;
     }
-    
+
     .forum-head {
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: center;
     }
-    
+
     .forum-option {
         display: flex;
         width: 50%;
         height: auto;
         justify-content: space-evenly;
     }
-    
+
     .forum-name {
         font-size: 20px;
     }
-    
+
     .forum-info {
         height: 80px;
         align-content: space-evenly;
     }
-    
+
     .forum-post-title {
         font-size: 16px;
     }
-    
+
     .forum-content {
         max-width: 67%;
         min-width: 67%;
         height: 54px;
         padding: 0px 5px;
     }
-    
+
     .forum-detail,
     .forum-preview {
         font-size: 14px;
     }
-    
+
     .forum-introduction {
         display: none;
     }
-    
+
     .forum-post-info,
     .forum-coin {
         font-size: 12px;
         max-width: 53%;
     }
-    
+
     .forum-post {
         height: 64px;
         width: 100%;
     }
-    
+
     .forum-post>img {
         width: 64px;
     }
-    
+
     .forum-post-type {
         line-height: 14px;
         font-size: 12px;
     }
-    
+
     .forum-content>f {
         width: 100%;
     }
-    
+
     .forum-interact>div {
         font-size: 12px;
         width: 100%;
@@ -464,7 +474,7 @@ input[type="radio"] {
         justify-items: center;
         justify-content: space-between;
     }
-    
+
     .forum-interact {
         margin-left: 3px;
         height: 100%;
@@ -472,39 +482,39 @@ input[type="radio"] {
         flex-direction: column;
         justify-content: space-evenly;
     }
-    
+
     .forum-top .forum-post {
         background: linear-gradient(to right, #f9f9ff 90%, #ffabab);
     }
-    
+
     .forum-posts[good="1"] .forum-post,
     .forum-posts .forum-post[good="1"] {
         background: linear-gradient(to right, #f9f9ff 90%, #ffabd9);
     }
-    
+
     .forum-tip {
         display: none;
     }
-    
+
     .forum-type {
         margin: 8px;
     }
-    
+
     .forum-type>label {
         padding: 10px 7px;
         font-size: 16px;
     }
-    
+
     .forum-search {
         width: 64%;
         padding-left: 0;
     }
-    
+
     .forum-search>input {
         font-size: 16px;
         width: 100%;
     }
-    
+
     .forum-new {
         padding: 0;
         color: transparent;
@@ -514,33 +524,33 @@ input[type="radio"] {
         background-size: 50%;
         background-repeat: no-repeat;
     }
-    
+
     .forum-more>f {
         width: auto;
     }
-    
+
     .forum-sort {
         width: 86%;
     }
-    
+
     .forum-other {
         height: 54px;
     }
-    
+
     .forum-read {
         color: transparent;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E %3Cpath fill='%23666666' d='M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z'%3E%3C/path%3E %3C/svg%3E");
         background-repeat: no-repeat;
         background-position: center;
     }
-    
+
     .forum-reply {
         color: transparent;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E %3Cpath fill='%23666666' d='M144 208c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm112 0c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm112 0c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zM256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32zm0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29 7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160-93.3 160-208 160z'%3E%3C/path%3E %3C/svg%3E");
         background-repeat: no-repeat;
         background-position: center;
     }
-    
+
     .forum-action {
         justify-content: space-between;
     }
@@ -655,7 +665,7 @@ const btForumHtml=`<div class="forum-head">
 <div class="forum-posts" good="1" page="1"></div>
 
 <div class="forum-more">
-  <f onclick="changePage(Number($('.forum-more>n').text())-1)" style="visibility:hidden">上一页</f>
+  <f style="visibility:hidden" onclick="changePage(Number($('.forum-more>n').text())-1)">上一页</f>
   <n style="display:none">1</n>
   <f onclick="changePage(Number($('.forum-more>n').text())+1)">下一页</f>
 </div>
@@ -790,10 +800,11 @@ function followChange() {
 function changePage(n) {
   let p = ($('.forum-posts[good="0"]').css('display') == 'block') ? '.forum-posts[good="0"]' : '.forum-posts[good="1"]';
   let t = ($('.forum-posts[good="0"]').css('display') == 'block') ? '.post-all .post-box' : '.refiny-post-all .post-box';
+  const postCount=($('.forum-posts[good="0"]').css('display') == 'block') ? Number($('#posts-counts').text()) : Number($('#refinements-counts').text());
   if (n > 0 && $('.forum').attr('next') == 1) {
     $('.forum').attr('next', 0);
     setTimeout(_ => $('.forum').attr('next', 1), 700);
-    if ($(t).length < n * 10) {
+    if ($(t).length < n * 10 && $(t).length != postCount) {
       $('.forum-more>f').attr('onclick', '');
       $('.forum-more>f').eq(1).css('cursor', 'wait');
       let nextpage = setInterval(_ => {
@@ -810,19 +821,21 @@ function changePage(n) {
       $(p).html('');
       $(p).attr('page', n);
       $('.forum-more>f').eq(0).css('visibility', (n == 1) ? 'hidden' : 'visible');
+      $('.forum-more>f').eq(1).css('visibility', (n == Math.ceil(postCount/10)) ? 'hidden' : 'visible');
       let good = ($('.forum-posts[good="1"]').css('display') == 'block');
-      for (let i = n * 10 - 10; i < n * 10; i++) machine.add('[sample="post"]', getPostInfo(i, $(t).eq(i), good), p);
+      const maxIndex = (postCount < n * 10) ? postCount : n * 10;
+      for (let i = n * 10 - 10; i < maxIndex; i++) machine.add('[sample="post"]', getPostInfo(i, $(t).eq(i), good), p);
       good ? $('.refiny-load-more').click() : $('.load-more').click();
       $('.forum-more>n').text(n);
     }
   }
 }
-$('.forum-more>f').eq(0).click(function() {
-    changePage(-1);
+/*$('.forum-more>f').eq(0).click(function() {
+    changePage(Number($('.forum-more>n').text())-1);
 });
 $('.forum-more>f').eq(1).click(function() {
-    changePage(1);
-});
+    changePage(Number($('.forum-more>n').text())+1);
+});*/
 function preload() {
   $('.forum').html(btForumHtml);
   if (localStorage.getItem('forumStyle') == 'new') {
