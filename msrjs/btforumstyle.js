@@ -585,7 +585,7 @@ const btForumHtml=`<div class="forum-head">
         <f class="forum-preview">大家好呀，吾乃cera女神教门徒bt，是背爆裂魔法使回家之人，时隔一年又来办愚人节离谱续写了，那么先把开头端上来：风儿闹，云儿飘，鸟儿飞高高。阳光洒满小楼道，女孩抿嘴笑。</f>
         <div>
           <f class="forum-post-info">By 和祯_BT
-  5分钟前
+  最近
 </f>
           <f class="forum-coin"></f>
         </div>
