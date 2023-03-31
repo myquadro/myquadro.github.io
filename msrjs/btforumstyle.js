@@ -713,8 +713,9 @@ $(()=>{
   $('#magic-btn').on('click', _ => gogogo());
 });
 
-$('#bt-share').on('click', () => {
+$(document).on('click', '#bt-share', function () {
     $('#share-hide-bt').val('https://' + $('.share-hide').val());
+    console.log($('.share-hide').val());
     $('#share-hide-bt').select();
     document.execCommand("copy");
     layer.msg('分享链接已复制', { time: 1000 });
