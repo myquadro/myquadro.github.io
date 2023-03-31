@@ -706,7 +706,7 @@ $(()=>{
     return false;
   }
   $('head').append(btForumStyle);
-  $('body').append('<img src="https://s1.ax1x.com/2023/03/31/pp24ZGV.png" id="magic-btn">');
+  $('body').append('<img src="https://masiro.me/images/%E7%AB%A0%E8%8A%82%E6%9C%AA%E5%8F%91%E5%B8%83.png" id="magic-btn">');
   $('#app').append('<div class="forum" next="1"></div>');
   $('#app').append('<input id="share-hide-bt" style="opacity: 0; position: fixed; top: -1000px; left: -1000px; display: inline-block;">');
   preload();
