@@ -673,6 +673,7 @@ const btForumHtml=`<div class="forum-head">
   <n style="display:none">1</n>
   <f onclick="changePage(Number($('.forum-more>n').text())+1)">下一页</f>
 </div>
+<div id="share-hide-bt" style="opacity: 0; position: fixed; top: -1000px; left: -1000px;"></div>
 
 <div style="display:none">
   <div sample="post">
@@ -711,7 +712,8 @@ $(()=>{
   preload();
   $('#magic-btn').on('click', _ => gogogo());
   $('#bt-share').on('click', _ => {
-    $('.share-hide').select();
+    $('#share-hide-bt').text($('.share-hide').val());
+    $('#share-hide-bt').select();
     document.execCommand('copy');
     layer.msg('分享链接已复制', { time: 1000 });
   });
