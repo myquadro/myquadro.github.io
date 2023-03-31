@@ -571,7 +571,7 @@ const btForumHtml=`<div class="forum-head">
   </div>
   <div class="forum-option">
     <f onclick="$('{{followBtn}}').click()">{{follow}}</f>
-    <f onclick="$('.share-hide').select();document.execCommand('copy');layer.msg('分享链接已复制', { time: 1000 });">分享</f>
+    <f id="bt-share">分享</f>
   </div>
 </div>
 
@@ -710,6 +710,11 @@ $(()=>{
   $('#app').append('<div class="forum" next="1"></div>');
   preload();
   $('#magic-btn').on('click', _ => gogogo());
+  $('#bt-share').on('click', _ => {
+    $('.share-hide').select();
+    document.execCommand('copy');
+    layer.msg('分享链接已复制', { time: 1000 });
+  });
 });
 
 function gogogo() {
