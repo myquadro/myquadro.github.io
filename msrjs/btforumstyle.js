@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         bt论坛样式
+// @name         btforumstyle
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
@@ -752,7 +752,7 @@ function getPostInfo(i, post, good) {
     reply: '.fa-comment-o',
     read: '.fa-book'
   }
-  for (let i in info) info[i] = post.find(info[i]).text();
+  for (let ii in info) info[ii] = post.find(info[ii]).text();
   let sUserAgent = navigator.userAgent;
   if (sUserAgent.indexOf('Android') > -1 || sUserAgent.indexOf('iPhone') > -1 || sUserAgent.indexOf('iPad') > -1 || sUserAgent.indexOf('iPod') > -1 || sUserAgent.indexOf('Symbian') > -1) {
     info.coin = info.coin.slice(info.coin.indexOf('P'));
@@ -826,6 +826,7 @@ function changePage(n) {
       const maxIndex = (postCount < n * 10) ? postCount : n * 10;
       for (let i = n * 10 - 10; i < maxIndex; i++) machine.add('[sample="post"]', getPostInfo(i, $(t).eq(i), good), p);
       good ? $('.refiny-load-more').click() : $('.load-more').click();
+            //console.log('change'+n);
       $('.forum-more>n').text(n);
     }
   }
