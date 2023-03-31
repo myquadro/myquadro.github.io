@@ -766,8 +766,8 @@ function getPostInfo(i, post, good) {
 }
 function working() {
   machine.re('.forum-head', getForumHead());
-  $('.post-all .post-box').each((i, p) => machine.add('[sample="post"]', getPostInfo(i, $(p)), '.forum-posts[good="0"]'));
-  $('.refiny-post-all .post-box').each((i, p) => machine.add('[sample="post"]', getPostInfo(i, $(p), !0), '.forum-posts[good="1"]'));
+  $('.post-all .post-box').each((i, p) => (i<10) && machine.add('[sample="post"]', getPostInfo(i, $(p)), '.forum-posts[good="0"]'));
+  $('.refiny-post-all .post-box').each((i, p) => (i<10) && machine.add('[sample="post"]', getPostInfo(i, $(p), !0), '.forum-posts[good="1"]'));
 }
 function switchIt(i) {
   if (i) {
