@@ -584,7 +584,7 @@ const btForumHtml=`<div class="forum-head">
 </span>【民间活动】愚人节“离谱续写” No.2</f>
         <f class="forum-preview">大家好呀，吾乃cera女神教门徒bt，是背爆裂魔法使回家之人，时隔一年又来办愚人节离谱续写了，那么先把开头端上来：风儿闹，云儿飘，鸟儿飞高高。阳光洒满小楼道，女孩抿嘴笑。</f>
         <div>
-          <f class="forum-post-info">By 和祯_BT 
+          <f class="forum-post-info">By 和祯_BT
   5分钟前
 </f>
           <f class="forum-coin"></f>
@@ -708,12 +708,14 @@ $(()=>{
   $('head').append(btForumStyle);
   $('body').append('<img src="https://s1.ax1x.com/2023/03/31/pp24ZGV.png" id="magic-btn">');
   $('#app').append('<div class="forum" next="1"></div>');
+  $('#app').append('<input id="share-hide-bt" style="opacity: 0; position: fixed; top: -1000px; left: -1000px; display: inline-block;">');
   preload();
   $('#magic-btn').on('click', _ => gogogo());
 });
 
-$('#bt-share').on('click', _ => {
-    $('.share-hide').select();
+$('#bt-share').on('click', () => {
+    $('#share-hide-bt').val('https://' + $('.share-hide').val());
+    $('#share-hide-bt').select();
     document.execCommand("copy");
     layer.msg('分享链接已复制', { time: 1000 });
 });
