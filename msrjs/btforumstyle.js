@@ -711,12 +711,13 @@ $(()=>{
   $('#app').append('<div class="forum" next="1"></div>');
   preload();
   $('#magic-btn').on('click', _ => gogogo());
-  $('#bt-share').on('click', _ => {
+});
+
+$('#bt-share').on('click', _ => {
     $('#share-hide-bt').text($('.share-hide').val());
     $('#share-hide-bt').select();
     document.execCommand('copy');
     layer.msg('分享链接已复制', { time: 1000 });
-  });
 });
 
 function gogogo() {
