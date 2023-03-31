@@ -576,24 +576,28 @@ const btForumHtml=`<div class="forum-head">
 </div>
 
 <div class="forum-top">
-  <div class="forum-post" onclick="window.open('/admin/post?post_id=24639')">
-    <img src="https://masiro.me/images/encode/other-220625114057-k93R.jpg">
-    <div class="forum-content">
-      <f class="forum-post-title"><span class="forum-post-type">撒币</span>关于愚人节的老(?)活动</f>
-      <f class="forum-preview">第一行留悬念</f>
-      <div>
-        <f class="forum-post-info">By 和祯_BT 两天前</f>
-        <f class="forum-coin">T:300G N:30 P:10G R:80% L:8</f>
+    <div class="forum-post" good="0" onclick="window.open('/admin/post?post_id=24682')">
+      <img src="/images/encode/other-220625114057-k93R.jpg?quality=20">
+      <div class="forum-content">
+        <f class="forum-post-title"><span class="forum-post-type">
+杂谈
+</span>【民间活动】愚人节“离谱续写” No.2</f>
+        <f class="forum-preview">大家好呀，吾乃cera女神教门徒bt，是背爆裂魔法使回家之人，时隔一年又来办愚人节离谱续写了，那么先把开头端上来：风儿闹，云儿飘，鸟儿飞高高。阳光洒满小楼道，女孩抿嘴笑。</f>
+        <div>
+          <f class="forum-post-info">By 和祯_BT 
+  5分钟前
+</f>
+          <f class="forum-coin"></f>
+        </div>
       </div>
-    </div>
-    <div class="forum-other">
-      <div class="forum-interact">
-        <div><f class="forum-reply">评论</f><f>∞</f></div>
-        <div><f class="forum-read">浏览</f><f>∞</f></div>
+      <div class="forum-other">
+        <div class="forum-interact">
+          <div><f class="forum-reply">评论</f><f>∞</f></div>
+          <div><f class="forum-read">浏览</f><f>∞</f></div>
+        </div>
       </div>
+      <div class="forum-tip"></div>
     </div>
-    <div class="forum-tip"></div>
-  </div>
   <div class="forum-post" onclick="window.open('/admin/post?post_id=12120')">
     <img src="https://masiro.me/images/encode/other-210519134404-UUzE.jpg">
     <div class="forum-content">
@@ -702,7 +706,7 @@ $(()=>{
     return false;
   }
   $('head').append(btForumStyle);
-  $('body').append('<img src="https://www.masiro.me/masiroImg/logo-small.ico" id="magic-btn">');
+  $('body').append('<img src="https://s1.ax1x.com/2023/03/31/pp24ZGV.png" id="magic-btn">');
   $('#app').append('<div class="forum" next="1"></div>');
   preload();
   $('#magic-btn').on('click', _ => gogogo());
