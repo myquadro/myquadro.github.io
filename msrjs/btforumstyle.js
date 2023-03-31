@@ -571,7 +571,7 @@ const btForumHtml=`<div class="forum-head">
   </div>
   <div class="forum-option">
     <f onclick="$('{{followBtn}}').click()">{{follow}}</f>
-    <f onclick="$('.btn-share').click()">分享</f>
+    <f onclick="$('.share-hide').select();document.execCommand("copy");layer.msg('分享链接已复制', { time: 1000 });">分享</f>
   </div>
 </div>
 
