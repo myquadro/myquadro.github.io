@@ -850,8 +850,8 @@ function changePage(n) {
 $('.forum-more>f').eq(1).click(function() {
     changePage(Number($('.forum-more>n').text())+1);
 });*/
-function preload() {
-  $('.forum').html(btForumHtml);
+async function preload() {
+  await $('.forum').html(btForumHtml);
   if (localStorage.getItem('forumStyle') == 'new') {
     working();
     switchIt(true);
