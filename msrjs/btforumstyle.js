@@ -850,15 +850,18 @@ function changePage(n) {
 $('.forum-more>f').eq(1).click(function() {
     changePage(Number($('.forum-more>n').text())+1);
 });*/
-async function preload() {
-  await $('.forum').html(btForumHtml);
-  if (localStorage.getItem('forumStyle') == 'new') {
-    await working();
-    switchIt(true);
-    $('.load-more').click();
-    $('.refiny-load-more').click();
-  }
-  $('.unfollow-btn').on('click', _ => followDown());
-  $('.follow-btn').on('click', _ => followDown());
-  $('.forum-type').on('click', _ => $('.forum-more>n').text($(($('.forum-posts[good="0"]').css('display') != 'block') ? '.forum-posts[good="0"]' : '.forum-posts[good="1"]').attr('page')));
+function preload() {
+  $('.forum').html(btForumHtml);
+  setTimeout(() => {
+    if (localStorage.getItem('forumStyle') == 'new') {
+      working();
+      switchIt(true);
+      $('.load-more').click();
+      $('.refiny-load-more').click();
+    }
+    $('.unfollow-btn').on('click', _ => followDown());
+    $('.follow-btn').on('click', _ => followDown());
+    $('.forum-type').on('click', _ => $('.forum-more>n').text($(($('.forum-posts[good="0"]').css('display') != 'block') ? '.forum-posts[good="0"]' : '.forum-posts[good="1"]').attr('page')));
+  }, "700");
+  
 }
