@@ -853,7 +853,7 @@ $('.forum-more>f').eq(1).click(function() {
 async function preload() {
   await $('.forum').html(btForumHtml);
   if (localStorage.getItem('forumStyle') == 'new') {
-    working();
+    await working();
     switchIt(true);
     $('.load-more').click();
     $('.refiny-load-more').click();
