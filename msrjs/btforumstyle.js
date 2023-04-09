@@ -1,13 +1,3 @@
-// ==UserScript==
-// @name         btforumstyle
-// @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  try to take over the world!
-// @author       You
-// @match        https://masiro.me/admin/forum?forum_id=*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=masiro.me
-// @grant        none
-// ==/UserScript==
 const btForumStyle=`<style>.forum {
   padding-top: 20px;
   display: none;
@@ -556,7 +546,7 @@ input[type="radio"] {
     }
 }</style>`;
 
-const btForumHtml=`<div class="forum-head">
+const btForumHtml=`<div class="forum" next="1"><div class="forum-head">
   <f class="forum-cover"></f>
   <div>
     <div class="forum-info">
@@ -673,22 +663,23 @@ const btForumHtml=`<div class="forum-head">
       <div class="forum-tip"></div>
     </div>
   </div>
-</div>`;
+</div></div>`;
 const machine = {
     add: (material, process, container) => machining(material, process, (model) => $(container).append(model)),
     pre: (material, process, container) => machining(material, process, (model) => $(container).prepend(model)),
     re: (material, process) => machining(material, process, (model) => $(material).html(model))
 }
 $(()=>{
-  if(document.URL.indexOf('forum_id=')<0){
-    return false;
-  }
-  $('head').append(btForumStyle);
-  $('body').append('<img src="https://masiro.me/images/%E7%AB%A0%E8%8A%82%E6%9C%AA%E5%8F%91%E5%B8%83.png" id="magic-btn">');
-  $('#app').append('<div class="forum" next="1"></div>');
-  $('#app').append('<input id="share-hide-bt" style="opacity: 0; position: fixed; top: -1000px; left: -1000px; display: inline-block;">');
-  preload();
-  $('#magic-btn').on('click', _ => gogogo());
+    if(document.URL.indexOf('forum_id=')<0){
+        return false;
+    }
+
+    $('head').append(btForumStyle);
+    $('body').append('<img src="https://masiro.me/images/%E7%AB%A0%E8%8A%82%E6%9C%AA%E5%8F%91%E5%B8%83.png" id="magic-btn">');
+    $('#app').append(btForumHtml);
+    $('#app').append('<input id="share-hide-bt" style="opacity: 0; position: fixed; top: -1000px; left: -1000px; display: inline-block;">');
+    preload();
+    $('#magic-btn').on('click', _ => gogogo());
 });
 
 $(document).on('click', '#bt-share', function () {
@@ -700,127 +691,132 @@ $(document).on('click', '#bt-share', function () {
 });
 
 function gogogo() {
-  if (localStorage.getItem('forumStyle') == 'new') {
-    localStorage.setItem('forumStyle', 'old');
-    switchIt(false);
-  }
-  else {
-    localStorage.setItem('forumStyle', 'new');
-    if (!$('.forum-posts').html()) {
-      working();
-      $('.load-more').click();
-      $('.refiny-load-more').click();
-    };
-    switchIt(true);
-  }
-}
-async function machining(material, process, callback) {
-  let model = $(material).html();
-  for (let steps in process) model = model.replaceAll(`{{${steps}}}`, process[steps]);
-  await callback(model);
-}
-function getForumHead() {
-  let info = $('.follow-info').text();
-  info = info.slice(0, info.indexOf('阅读') + 2);
-  return {
-    cover: $('.cover img').attr('src'),
-    info: info,
-    name: $('.forum-title ').text(),
-    follow: $('.follow-btn').css('display') == 'none' ? '已关注' : '关注',
-    followBtn: $('.follow-btn').css('display') == 'none' ? '.unfollow-btn' : '.follow-btn'
-  }
-  //暂且不需要获取置顶，暂且不会变更
-}
-function getPostInfo(i, post, good) {
-  let info = {
-    name: '.user-name',
-    time: '.time',
-    lv: '.user-lev',
-    tag: '.post-tag',
-    title: '.post-content>b',
-    detail: '.content-text',
-    coin: '.post-footer>span',
-    reply: '.fa-comment-o',
-    read: '.fa-book'
-  }
-  for (let ii in info) info[ii] = post.find(info[ii]).text();
-  let sUserAgent = navigator.userAgent;
-  if (sUserAgent.indexOf('Android') > -1 || sUserAgent.indexOf('iPhone') > -1 || sUserAgent.indexOf('iPad') > -1 || sUserAgent.indexOf('iPod') > -1 || sUserAgent.indexOf('Symbian') > -1) {
-    info.coin = info.coin.slice(info.coin.indexOf('P'));
-  }
-  info.reply = info.reply.slice(3).slice(0, -1);
-  info.read = info.read.slice(3).slice(0, -1);
-  info.good = post.find('.lanren1').length;
-  info.href = $(good ? '.refiny-post-all>.post-box>a' : '.post-all>a').eq(i).attr('href');
-  info.avatar = post.find('.head-pic').attr('src');
-  return info;
-}
-function working() {
-  machine.re('.forum-head', getForumHead());
-  $('.post-all .post-box').each((i, p) => (i<10) && machine.add('[sample="post"]', getPostInfo(i, $(p)), '.forum-posts[good="0"]'));
-  $('.refiny-post-all .post-box').each((i, p) => (i<10) && machine.add('[sample="post"]', getPostInfo(i, $(p), !0), '.forum-posts[good="1"]'));
-}
-function switchIt(i) {
-  if (i) {
-    $('.post-btn').fadeOut(250);
-    $('#forum-head').fadeOut(250);
-    $('#forum-body').fadeOut(250, _ => {
-      $('.content').css('cssText', 'padding:0 !important');
-      $('.content').css('min-height', 0);
-      $('.forum').fadeIn(250);
-    });
-  }
-  else {
-    $('.forum').fadeOut(250, _ => {
-      $('.content').css('cssText', '');
-      $('.content').css('min-height', '');
-      $('.post-btn').fadeIn(250);
-      $('#forum-head').fadeIn(250);
-      $('#forum-body').fadeIn(250);
-    });
-  }
-}
-function followDown() {
-  let state = $('.follow-btn').css('display');
-  let timer = setInterval(_ => ($('.follow-btn').css('display') != state) ? followChange(clearInterval(timer)) : state = $('.follow-btn').css('display'), 100);
-}
-function followChange() {
-  $('.forum-option>f').eq(0).text($('.forum-option>f').eq(0).text() == '关注' ? '已关注' : '关注');
-  $('.forum-option>f').eq(0).attr('onclick', $('.forum-option>f').eq(0).attr('onclick') == "$('.follow-btn').click()" ? "$('.unfollow-btn').click()" : "$('.follow-btn').click()");
-}
-function changePage(n) {
-  let p = ($('.forum-posts[good="0"]').css('display') == 'block') ? '.forum-posts[good="0"]' : '.forum-posts[good="1"]';
-  let t = ($('.forum-posts[good="0"]').css('display') == 'block') ? '.post-all .post-box' : '.refiny-post-all .post-box';
-  const postCount=($('.forum-posts[good="0"]').css('display') == 'block') ? Number($('#posts-counts').text()) : Number($('#refinements-counts').text());
-  if (n > 0 && $('.forum').attr('next') == 1) {
-    $('.forum').attr('next', 0);
-    setTimeout(_ => $('.forum').attr('next', 1), 700);
-    if ($(t).length < n * 10 && $(t).length != postCount) {
-      $('.forum-more>f').attr('onclick', '');
-      $('.forum-more>f').eq(1).css('cursor', 'wait');
-      let nextpage = setInterval(_ => {
-        if ($(t).length >= n * 10) {
-          clearInterval(nextpage);
-          changePage(n);
-          $('.forum-more>f').eq(0).attr('onclick', "changePage(Number($('.forum-more>n').text())-1)");
-          $('.forum-more>f').eq(1).attr('onclick', "changePage(Number($('.forum-more>n').text())+1)");
-          $('.forum-more>f').eq(1).css('cursor', 'pointer');
-        }
-      }, 100);
+    if (localStorage.getItem('forumStyle') == 'new') {
+        localStorage.setItem('forumStyle', 'old');
+        switchIt(false);
     }
     else {
-      $(p).html('');
-      $(p).attr('page', n);
-      $('.forum-more>f').eq(0).css('visibility', (n == 1) ? 'hidden' : 'visible');
-      $('.forum-more>f').eq(1).css('visibility', (n == Math.ceil(postCount/10)) ? 'hidden' : 'visible');
-      let good = ($('.forum-posts[good="1"]').css('display') == 'block');
-      const maxIndex = (postCount < n * 10) ? postCount : n * 10;
-      for (let i = n * 10 - 10; i < maxIndex; i++) machine.add('[sample="post"]', getPostInfo(i, $(t).eq(i), good), p);
-      good ? $('.refiny-load-more').click() : $('.load-more').click();
-            //console.log('change'+n);
-      $('.forum-more>n').text(n);
+        localStorage.setItem('forumStyle', 'new');
+        if (!$('.forum-posts').html()) {
+            working();
+            $('.load-more').click();
+            $('.refiny-load-more').click();
+        };
+        switchIt(true);
     }
-  }
+}
+async function machining(material, process, callback) {
+    let model = $(material).html();
+    for (let steps in process) model = model.replaceAll(`{{${steps}}}`, process[steps]);
+    await callback(model);
+}
+function getForumHead() {
+    let info = $('.follow-info').text();
+    info = info.slice(0, info.indexOf('阅读') + 2);
+    return {
+        cover: $('.cover img').attr('src'),
+        info: info,
+        name: $('.forum-title ').text(),
+        follow: $('.follow-btn').css('display') == 'none' ? '已关注' : '关注',
+        followBtn: $('.follow-btn').css('display') == 'none' ? '.unfollow-btn' : '.follow-btn'
+    }
+    //暂且不需要获取置顶，暂且不会变更
+}
+function getPostInfo(i, post, good) {
+    let info = {
+        name: '.user-name',
+        time: '.time',
+        lv: '.user-lev',
+        tag: '.post-tag',
+        title: '.post-content>b',
+        detail: '.content-text',
+        coin: '.post-footer>span',
+        reply: '.fa-comment-o',
+        read: '.fa-book'
+    }
+    for (let ii in info) info[ii] = post.find(info[ii]).text();
+    let sUserAgent = navigator.userAgent;
+    if (sUserAgent.indexOf('Android') > -1 || sUserAgent.indexOf('iPhone') > -1 || sUserAgent.indexOf('iPad') > -1 || sUserAgent.indexOf('iPod') > -1 || sUserAgent.indexOf('Symbian') > -1) {
+        info.coin = info.coin.slice(info.coin.indexOf('P'));
+    }
+    info.reply = info.reply.slice(3).slice(0, -1);
+    info.read = info.read.slice(3).slice(0, -1);
+    info.good = post.find('.lanren1').length;
+    info.href = $(good ? '.refiny-post-all>.post-box>a' : '.post-all>a').eq(i).attr('href');
+    info.avatar = post.find('.head-pic').attr('src');
+    return info;
+}
+function working() {
+    let loadHtml = setInterval(_ => {
+        if ($('f').length > 0) {
+            machine.re('.forum-head', getForumHead());
+            $('.post-all .post-box').each((i, p) => (i<10) && machine.add('[sample="post"]', getPostInfo(i, $(p)), '.forum-posts[good="0"]'));
+            $('.refiny-post-all .post-box').each((i, p) => (i<10) && machine.add('[sample="post"]', getPostInfo(i, $(p), !0), '.forum-posts[good="1"]'));
+            clearInterval(loadHtml);
+        }
+    }, 100);
+}
+function switchIt(i) {
+    if (i) {
+        $('.post-btn').fadeOut(250);
+        $('#forum-head').fadeOut(250);
+        $('#forum-body').fadeOut(250, _ => {
+            $('.content').css('cssText', 'padding:0 !important');
+            $('.content').css('min-height', 0);
+            $('.forum').fadeIn(250);
+        });
+    }
+    else {
+        $('.forum').fadeOut(250, _ => {
+            $('.content').css('cssText', '');
+            $('.content').css('min-height', '');
+            $('.post-btn').fadeIn(250);
+            $('#forum-head').fadeIn(250);
+            $('#forum-body').fadeIn(250);
+        });
+    }
+}
+function followDown() {
+    let state = $('.follow-btn').css('display');
+    let timer = setInterval(_ => ($('.follow-btn').css('display') != state) ? followChange(clearInterval(timer)) : state = $('.follow-btn').css('display'), 100);
+}
+function followChange() {
+    $('.forum-option>f').eq(0).text($('.forum-option>f').eq(0).text() == '关注' ? '已关注' : '关注');
+    $('.forum-option>f').eq(0).attr('onclick', $('.forum-option>f').eq(0).attr('onclick') == "$('.follow-btn').click()" ? "$('.unfollow-btn').click()" : "$('.follow-btn').click()");
+}
+function changePage(n) {
+    let p = ($('.forum-posts[good="0"]').css('display') == 'block') ? '.forum-posts[good="0"]' : '.forum-posts[good="1"]';
+    let t = ($('.forum-posts[good="0"]').css('display') == 'block') ? '.post-all .post-box' : '.refiny-post-all .post-box';
+    const postCount=($('.forum-posts[good="0"]').css('display') == 'block') ? Number($('#posts-counts').text()) : Number($('#refinements-counts').text());
+    if (n > 0 && $('.forum').attr('next') == 1) {
+        $('.forum').attr('next', 0);
+        setTimeout(_ => $('.forum').attr('next', 1), 700);
+        if ($(t).length < n * 10 && $(t).length != postCount) {
+            $('.forum-more>f').attr('onclick', '');
+            $('.forum-more>f').eq(1).css('cursor', 'wait');
+            let nextpage = setInterval(_ => {
+                if ($(t).length >= n * 10) {
+                    clearInterval(nextpage);
+                    changePage(n);
+                    $('.forum-more>f').eq(0).attr('onclick', "changePage(Number($('.forum-more>n').text())-1)");
+                    $('.forum-more>f').eq(1).attr('onclick', "changePage(Number($('.forum-more>n').text())+1)");
+                    $('.forum-more>f').eq(1).css('cursor', 'pointer');
+                }
+            }, 100);
+        }
+        else {
+            $(p).html('');
+            $(p).attr('page', n);
+            $('.forum-more>f').eq(0).css('visibility', (n == 1) ? 'hidden' : 'visible');
+            $('.forum-more>f').eq(1).css('visibility', (n == Math.ceil(postCount/10)) ? 'hidden' : 'visible');
+            let good = ($('.forum-posts[good="1"]').css('display') == 'block');
+            const maxIndex = (postCount < n * 10) ? postCount : n * 10;
+            for (let i = n * 10 - 10; i < maxIndex; i++) machine.add('[sample="post"]', getPostInfo(i, $(t).eq(i), good), p);
+            good ? $('.refiny-load-more').click() : $('.load-more').click();
+            //console.log('change'+n);
+            $('.forum-more>n').text(n);
+        }
+    }
 }
 /*$('.forum-more>f').eq(0).click(function() {
     changePage(Number($('.forum-more>n').text())-1);
@@ -829,17 +825,15 @@ $('.forum-more>f').eq(1).click(function() {
     changePage(Number($('.forum-more>n').text())+1);
 });*/
 function preload() {
-  $('.forum').html(btForumHtml);
-  setTimeout(() => {
+
     if (localStorage.getItem('forumStyle') == 'new') {
-      working();
-      switchIt(true);
-      $('.load-more').click();
-      $('.refiny-load-more').click();
+        working();
+        switchIt(true);
+        $('.load-more').click();
+        $('.refiny-load-more').click();
     }
     $('.unfollow-btn').on('click', _ => followDown());
     $('.follow-btn').on('click', _ => followDown());
     $('.forum-type').on('click', _ => $('.forum-more>n').text($(($('.forum-posts[good="0"]').css('display') != 'block') ? '.forum-posts[good="0"]' : '.forum-posts[good="1"]').attr('page')));
-  }, "700");
-  
+
 }
