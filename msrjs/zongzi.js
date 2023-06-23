@@ -18,7 +18,12 @@ function zongzi(){
     $('.reply').remove();
     $('.show_reply_list').remove();
     $('.last-reply').attr('class','reply');
-    setTimeout(() => {
-        $('show-over-flow').click();
-    }, "200");
+    $('show-over-flow').each(function() {
+        $(this).removeClass('show-over-flow');
+        $(this).removeClass('glyphicon-chevron-down');
+        $(this).parent().prev().prev().css('max-height', '');
+        $(this).addClass('hide-over-flow');
+        $(this).addClass('glyphicon-chevron-up');
+        $(this).html('收起');
+    });
 }
