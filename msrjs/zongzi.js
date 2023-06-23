@@ -9,6 +9,7 @@ function zongzi(){
         return;
     }
     $('d').remove();
+    $('show-over-flow').click();
     if(document.URL.indexOf('blacksheepwall')>=0){
         return;
     }
