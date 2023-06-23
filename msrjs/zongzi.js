@@ -21,7 +21,7 @@ function zongzi(){
     $('show-over-flow').each(function() {
         $(this).removeClass('show-over-flow');
         $(this).removeClass('glyphicon-chevron-down');
-        $(this).parent().prev().prev().css('max-height', '');
+        $(this).parent().prev().css('max-height', '');
         $(this).addClass('hide-over-flow');
         $(this).addClass('glyphicon-chevron-up');
         $(this).html('收起');
