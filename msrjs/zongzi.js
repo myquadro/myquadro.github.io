@@ -9,7 +9,6 @@ function zongzi(){
         return;
     }
     $('d').remove();
-    $('show-over-flow').click();
     if(document.URL.indexOf('blacksheepwall')>=0){
         return;
     }
@@ -19,4 +18,7 @@ function zongzi(){
     $('.reply').remove();
     $('.show_reply_list').remove();
     $('.last-reply').attr('class','reply');
+    setTimeout(() => {
+        $('show-over-flow').click();
+    }, "200");
 }
