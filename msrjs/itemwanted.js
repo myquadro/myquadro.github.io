@@ -97,7 +97,7 @@
     ——摘自<a>《一些收藏品文案编写须知》</a>
     <p class="rarity">RARITY 0</p></div>
     <span class="layui-card-footer"><span class="num">数量:0</span>
-    <button class="btn_dj">一个按钮</button></span></div><p> </p>`;
+    <button onclick="tfAll()" class="btn_dj">一个按钮</button></span></div><p> </p>`;
     $('style').first().append(layuiCardCss);
     $('.top-notice').append(layuiCard);
     $('.notice_content').css('overflow','visible');
