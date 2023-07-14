@@ -1,4 +1,10 @@
-(function() {
+if (window.addEventListener) {
+    document.addEventListener('DOMContentLoaded', initialItem);
+}
+else if (window.attachEvent) {
+    document.attachEvent('onDOMContentLoaded', initialItem);
+}
+function initialItem() {
     if(document.URL.indexOf('post_id')<0){return;}
     const layuiCardCss=`@font-face {
     font-family: 'masiroweb';
@@ -90,7 +96,9 @@
     margin-left:5px;
     color: OrangeRed;
     font-family: masiroweb;
-}`;
+}
+.layui-layer-shade{z-index:-1!important;}
+.message-frame {left:auto!important;}`;
     const layuiCard=`<p>如果您翻译的小说符合下列条件之一，可申请加入收藏品：<br> 1.文库化,<br> 2.漫画化,<br> 3.动画化,<br> 4.完结,<br> 5.您想起高兴的事情……</p><div class="layui-card">
     <div class="layui-card-header">一个例子</div>
     <div class="layui-card-body">一段文案，和原作相关，100字以内且最好不多于3行<br>
@@ -102,7 +110,7 @@
     $('.top-notice').append(layuiCard);
     $('.notice_content').css('overflow','visible');
     $('.btn_dj').click(function(){tfAll()});
-})();
+}
 
 function tfAll(){
     const tfNum= Math.random()*3;
