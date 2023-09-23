@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>驯兽师羊毛厂</title>
+  <style>
+    body {
+      background-color: #eee;
+      color: #115;
+      --seihaiga: #d8ffd8;
+      background-image:
+        radial-gradient(circle at 100% 150%, white 24%, var(--seihaiga) 24%, var(--seihaiga) 28%, white 28%, white 36%, var(--seihaiga) 36%, var(--seihaiga) 40%, transparent 40%, transparent),
+        radial-gradient(circle at 0 150%, white 24%, var(--seihaiga) 24%, var(--seihaiga) 28%, white 28%, white 36%, var(--seihaiga) 36%, var(--seihaiga) 40%, transparent 40%, transparent),
+        radial-gradient(circle at 50% 100%, var(--seihaiga) 10%, white 10%, white 23%, var(--seihaiga) 23%, var(--seihaiga) 30%, white 30%, white 43%, var(--seihaiga) 43%, var(--seihaiga) 50%, white 50%, white 63%, var(--seihaiga) 63%, var(--seihaiga) 71%, transparent 71%, transparent),
+        radial-gradient(circle at 100% 50%, var(--seihaiga) 5%, white 5%, white 15%, var(--seihaiga) 15%, var(--seihaiga) 20%, white 20%, white 29%, var(--seihaiga) 29%, var(--seihaiga) 34%, white 34%, white 44%, var(--seihaiga) 44%, var(--seihaiga) 49%, transparent 49%, transparent),
+        radial-gradient(circle at 0 50%, var(--seihaiga) 5%, white 5%, white 15%, var(--seihaiga) 15%, var(--seihaiga) 20%, white 20%, white 29%, var(--seihaiga) 29%, var(--seihaiga) 34%, white 34%, white 44%, var(--seihaiga) 44%, var(--seihaiga) 49%, transparent 49%, transparent) !important;
+      background-size: 150px 75px !important;
+      background-repeat: repeat !important;
+    }
+
+    .tablinks {
+      line-height: 50px;
+      text-align: center;
+      font-weight: 700;
+      width: 200px;
+      height: 50px;
+      vertical-align: bottom;
+      font-size: 20px;
+      display: inline-block;
+      background-color: blue;
+      color: white;
+      z-index: 1;
+      border-radius: 5px 5px 0 0;
+      cursor: pointer;
+    }
+
+    .tablinks:nth-child(1) {
+      background-color: #0b486b;
+    }
+
+    .tablinks:nth-child(2) {
+      background-color: #3b8686;
+    }
+
+    .tablinks:nth-child(3) {
+      background-color: #79bd9a;
+    }
+
+    .tablinks:nth-child(4) {
+      background-color: #5bbbd8;
+    }
+
+    .tablinks:nth-child(5) {
+      background-color: #74a0d3;
+    }
+
+    .tablinks.active {
+      border-bottom: 3px solid white;
+      background-color: white;
+      background-size: 90% 100%;
+      z-index: 1;
+    }
+
+    .tablinks:nth-child(1).active {
+      border-left: 3px solid #0b486b;
+      color: #0b486b;
+    }
+
+    .tablinks:nth-child(2).active {
+      border-left: 3px solid #3b8686;
+      color: #3b8686;
+    }
+
+    .tablinks:nth-child(3).active {
+      border-left: 3px solid #79bd9a;
+      color: #79bd9a;
+    }
+
+    .tablinks:nth-child(4).active {
+      border-left: 3px solid #5bbbd8;
+      color: #5bbbd8;
+    }
+
+    .tablinks:nth-child(5).active {
+      border-left: 3px solid #74a0d3;
+      color: #74a0d3;
+    }
+
+    .tabcontent {
+      background-color: white;
+      display: none;
+      margin-top: -1px;
+      z-index: 0;
+      width: 100%;
+    }
+
+    .item-container {
+      display: flex;
+      flex-wrap: wrap;
+      /*justify-content: space-between;*/
+      width: 100%;
+    }
+
+    .item-card {
+      width: 200px;
+    }
+
+    .item-img {
+      height: 100px;
+    }
+
+    .item-title {
+      height: 2em;
+      overflow: hidden;
+      white-space: normal;
+      text-overflow: ellipsis;
+    }
+  </style>
+
+  <script>
+    /*change tab*/
+    function openTab(evt, tabName) {
+      let i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+  </script>
+</head>
+
+<body>
+  <div class="tab-body">
+    <!-- 标签页部分 -->
+    <div class="tablinks active" onclick="openTab(event, 'Tab1')" style="width:300px;">穿</div>
+    <div class="tablinks" onclick="openTab(event, 'Tab2')">玩</div>
+    <div class="tablinks" onclick="openTab(event, 'Tab3')">用</div>
+
+    <!-- 标签页内容部分 -->
+    <div id="Tab1" class="tabcontent" style="display:block;">
+      <div class="item-container">
+        <div class='item-card'><a
+            href="https://www.amazon.de/Naturino-Ni%C3%B1o-Zapatos-abiertos-Sandalias/dp/B07N99VMKY?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/71M8AF7q0rL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Naturino WAD-Halboffener Lederschuh-Hellblau </div>现价:28.14 折扣:-64.47%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Naturino-PUFFY-Halb-geschlossene-Sandale-braun/dp/B07MFV973N?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/610+VTV8UtL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Naturino Unisex Baby Puffy Sandalen </div>现价:30.08 折扣:-63.67%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Naturino-Kinder-Sandalen-C08-606983/dp/B07L13ZFQH?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/71Fm6-5dCqL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Naturino PUFFY-Halb geschlossene Sandalen </div>现价:31.05 折扣:-62.59%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Naturino-PUFFY-Halb-geschlossene-Sandale-gelb/dp/B07VZYMHWP?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/71FmKE9PAqL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Naturino PUFFY-Halb geschlossene Sandalen </div>现价:31.34 折扣:-62.15%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Naturino-Eindhoven-Krippenschuh-Hellblau-Milk/dp/B0B9XLJ7BQ?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/61GHVpCCs6L._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Naturino Eindhoven VL-Sneakers aus Leder mit Print </div>现价:37.5 折扣:-61.73%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Naturino-M%C3%A4dchen-Cocoon-Gymnastikschuhe-Pink/dp/B07M7K7B7N?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/6154iIiiMbL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Naturino Cocoon-Lauflernschuh aus Nappleder-Altrosa </div>现价:31.94 折扣:-55.01%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Naturino-PUFFY-Halb-geschlossene-Sandale-blau/dp/B07MQ9N7DZ?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/71sJPnjLcjL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Naturino PUFFY-Halb geschlossene Sandalen </div>现价:41 折扣:-50.48%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Superfit-Baby-Jungen-Ulli-Lauflernschuh-blau/dp/B09SLNXNLS?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/61VXOe9p1mL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Superfit Baby-Jungen Ulli Lauflernschuh </div>现价:23.16 折扣:-69.10%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Superfit-Breeze-Sneaker-BLAU-20/dp/B099NPQ8LG?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/512hqFTaezL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Superfit Jungen Breeze Lauflernschuhe </div>现价:20.1 折扣:-66.47%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Superfit-Bumblebee-Sandale-GR%C3%9CN-HELLGR%C3%9CN/dp/B0B9HN59S5?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/71DEcaAlIiL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Superfit Jungen Bumblebee Sandale </div>现价:25.71 折扣:-60.42%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Superfit-Sunny-Sandale-LILA-PINK/dp/B0B9HJSW35?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/61Ot-nxP2pL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Superfit Mädchen Sunny Sandale </div>现价:27.6 折扣:-57.51%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Superfit-Cosmo-Sneaker-GRAU-2010/dp/B09SL121W8?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/61N4dzDAbwL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Superfit Jungen Cosmo Sneaker </div>现价:42.75 折扣:-57.23%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Superfit-Tornado-Light-Sandale-HELLBLAU/dp/B099NRLNZK?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/71GJzY7I0IL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Superfit Jungen Tornado Light Sandale </div>现价:32.95 折扣:-52.89%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Superfit-Baby-Jungen-Papageno-Lauflernschuh-blau/dp/B09SLN8GDZ?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/81bG7lCMZWL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Superfit Baby-Jungen Papageno Warm Gefütterte Lauflernschuhe </div>现价:21.85 折扣:-51.39%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Naturino-Unisex-Baby-Puffy-Sandalen/dp/B07MFVBJFS?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/71sJPnjLcjL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Naturino Unisex Baby Puffy Sandalen </div>现价:30.08 折扣:-63.76%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Naturino-M%C3%A4dchen-Cocoon-Gymnastikschuhe-Pink/dp/B07M7K7B7N?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/6154iIiiMbL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Naturino Cocoon-Lauflernschuh aus Nappleder-Altrosa </div>现价:31.94 折扣:-55.01%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/RICOSTA-M%C3%A4dchen-Sandalen-Kinder-Lauflernschuhe/dp/B0BJ7LDBD3?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/61OvefjKoeL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>RICOSTA Mädchen und Jungen Sandalen GERY,Kinder Lauflernschuhe,WMS:Mittel </div>
+          现价:30.99 折扣:-50.77%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Pepino-Ricosta-Jungen-Sandalen-Kinderschuhe/dp/B09GV8R39B?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/61V9z8A-D9L._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>RICOSTA Sandale </div>现价:29.99 折扣:-50.01%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Tamaris-Schn%C3%BCrstiefel-Wechselfu%C3%9Fbett-wasserabweisend-uebergangsstiefel/dp/B0BSLRKDHF?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/61rFPtKhu1L._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Tamaris Damen Stiefelette 1-26244-41 normal </div>现价:47.99 折扣:-51.99%
+        </div>
+        <div class='item-card'><a
+            href="https://www.amazon.de/Playshoes-Winterstiefel-Schneeschuhe-Warmfutter-Schneestiefel/dp/B00VPUWB92?tag=xunshoushi-21"
+            target="_blank"><img class="item-img"
+              src="https://m.media-amazon.com/images/I/71rC6kDWfZL._AC_UL320_.jpg"></a><br>
+          <div class='item-title'>Playshoes Unisex Kinder Winter-Bootie Schneeschuh </div>现价:16.99 折扣:-51.44%
+        </div>
+
+      </div>
+    </div>
+
+    <div id="Tab2" class="tabcontent">
+      <div class="item-container">
+
+      </div>
+    </div>
+
+    <div id="Tab3" class="tabcontent">
+      <div class="item-container">
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <div style="margin-top:5em;"> </div>
+  <hr>
+  <span>欢迎私信<a href='https://www.xiaohongshu.com/user/profile/5ca6706d0000000017012907'>小红书@吞金兽驯兽师。</a></span>
+</body>
+
+</html>
