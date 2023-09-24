@@ -8,15 +8,6 @@
     body {
       background-color: #eee;
       color: #115;
-      --seihaiga: #d8ffd8;
-      background-image:
-        radial-gradient(circle at 100% 150%, white 24%, var(--seihaiga) 24%, var(--seihaiga) 28%, white 28%, white 36%, var(--seihaiga) 36%, var(--seihaiga) 40%, transparent 40%, transparent),
-        radial-gradient(circle at 0 150%, white 24%, var(--seihaiga) 24%, var(--seihaiga) 28%, white 28%, white 36%, var(--seihaiga) 36%, var(--seihaiga) 40%, transparent 40%, transparent),
-        radial-gradient(circle at 50% 100%, var(--seihaiga) 10%, white 10%, white 23%, var(--seihaiga) 23%, var(--seihaiga) 30%, white 30%, white 43%, var(--seihaiga) 43%, var(--seihaiga) 50%, white 50%, white 63%, var(--seihaiga) 63%, var(--seihaiga) 71%, transparent 71%, transparent),
-        radial-gradient(circle at 100% 50%, var(--seihaiga) 5%, white 5%, white 15%, var(--seihaiga) 15%, var(--seihaiga) 20%, white 20%, white 29%, var(--seihaiga) 29%, var(--seihaiga) 34%, white 34%, white 44%, var(--seihaiga) 44%, var(--seihaiga) 49%, transparent 49%, transparent),
-        radial-gradient(circle at 0 50%, var(--seihaiga) 5%, white 5%, white 15%, var(--seihaiga) 15%, var(--seihaiga) 20%, white 20%, white 29%, var(--seihaiga) 29%, var(--seihaiga) 34%, white 34%, white 44%, var(--seihaiga) 44%, var(--seihaiga) 49%, transparent 49%, transparent) !important;
-      background-size: 150px 75px !important;
-      background-repeat: repeat !important;
     }
 
     .tablinks {
@@ -104,6 +95,10 @@
 
     .item-card {
       width: 200px;
+      border:1px #888 solid;
+      border-radius: 5px;
+      padding:5px;
+      margin:5px;
     }
 
     .item-img {
@@ -111,10 +106,17 @@
     }
 
     .item-title {
-      height: 2em;
+      height: 34px;
+      font-size: 12px;
       overflow: hidden;
       white-space: normal;
       text-overflow: ellipsis;
+    }
+    .preis{
+      color:black;
+    }
+    .rabatt{
+      color:red;
     }
   </style>
 
@@ -138,6 +140,8 @@
 </head>
 
 <body>
+  <div class="logo"></div>
+  
   <div class="tab-body">
     <!-- 标签页部分 -->
     <div class="tablinks active" onclick="openTab(event, 'Tab1')" style="width:300px;">穿</div>
@@ -150,8 +154,8 @@
         <div class='item-card'><a
             href="https://www.amazon.de/Naturino-Ni%C3%B1o-Zapatos-abiertos-Sandalias/dp/B07N99VMKY?tag=xunshoushi-21"
             target="_blank"><img class="item-img"
-              src="https://m.media-amazon.com/images/I/71M8AF7q0rL._AC_UL320_.jpg"></a><br>
-          <div class='item-title'>Naturino WAD-Halboffener Lederschuh-Hellblau </div>现价:28.14 折扣:-64.47%
+              src="https://m.media-amazon.com/images/I/71M8AF7q0rL._AC_UL320_.jpg"><br>
+          <div class='item-title'>Naturino WAD-Halboffener Lederschuh-Hellblau </div></a>现价:28.14 折扣:-64.47%
         </div>
         <div class='item-card'><a
             href="https://www.amazon.de/Naturino-PUFFY-Halb-geschlossene-Sandale-braun/dp/B07MFV973N?tag=xunshoushi-21"
