@@ -133,8 +133,32 @@
   </style>
 
   <script>
+    if (window.addEventListener) {
+      document.addEventListener('DOMContentLoaded', FillHtml(1));
+    }else if (window.attachEvent) {
+      document.attachEvent('onDOMContentLoaded', FillHtml(1));
+    }
+    function FillHtml(tab){
+      const item_container=document.getElementsByClassName("item-container")[tab];
+      if(item_container.textContent){
+        return;
+      }
+      fetch('/amz/tabcontent'+tab+'.html')
+            .then(function(response) {
+            return response.text();
+        })
+            .then(function(responsetext) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(responsetext, "text/html");
+            const content=doc.innerHTML;
+            item_container.innerHTML=content;
+        })
+            .catch(function(err) {
+            console.log(err);
+        });
+    }
     /*change tab*/
-    function openTab(evt, tabName) {
+    function openTab(evt, tabIndex) {
       let i, tabcontent, tablinks;
       tabcontent = document.getElementsByClassName("tabcontent");
       for (i = 0; i < tabcontent.length; i++) {
@@ -144,7 +168,8 @@
       for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
       }
-      document.getElementById(tabName).style.display = "block";
+      tabcontent[tabIndex].style.display = "block";
+      FillHtml(tabIndex);
       evt.currentTarget.className += " active";
     }
 
@@ -156,32 +181,23 @@
 
   <div class="tab-body">
     <!-- 标签页部分 -->
-    <div class="tablinks active" onclick="openTab(event, 'Tab1')">穿</div>
-    <div class="tablinks" onclick="openTab(event, 'Tab2')">玩</div>
-    <div class="tablinks" onclick="openTab(event, 'Tab3')">用</div>
+    <div class="tablinks active" onclick="openTab(event, 0)">穿</div>
+    <div class="tablinks" onclick="openTab(event, 1)">玩</div>
+    <div class="tablinks" onclick="openTab(event, 2)">用</div>
 
     <!-- 标签页内容部分 -->
-    <div id="Tab1" class="tabcontent" style="display:block;">
+    <div class="tabcontent" style="display:block;">
       <div class="item-container">
-      <!--items-begin-->
-        <iframe src="/amz/tabcontent1.html"></iframe>
-      <!--items-end-->
       </div>
     </div>
 
-    <div id="Tab2" class="tabcontent">
+    <div class="tabcontent">
       <div class="item-container">
-      <!--items-begin-->
-        <iframe src="/amz/tabcontent2.html"></iframe>
-      <!--items-end-->
       </div>
     </div>
 
-    <div id="Tab3" class="tabcontent">
+    <div class="tabcontent">
       <div class="item-container">
-      <!--items-begin-->
-        <iframe src="/amz/tabcontent3.html"></iframe>
-      <!--items-end-->
       </div>
     </div>
 
