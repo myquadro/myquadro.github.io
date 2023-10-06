@@ -136,6 +136,10 @@
       color: #333;
     }
 
+    .update-time{
+      color:#0000;
+    }
+
     @media screen and (orientation: portrait) {
       .tablinks {
         width: 25vw;
@@ -168,6 +172,7 @@
           for(const itemCard of itemCards){
             itemCard.setAttribute('title',itemCard.getElementsByClassName('item-title')[0].textContent);
           }
+          item_container.insertAdjacentElement('afterend',doc.getElementsByClassName('update-time')[0]);
         })
         .catch(function (err) {
           console.log(err);
