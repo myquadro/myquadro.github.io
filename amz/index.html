@@ -133,30 +133,30 @@
   </style>
 
   <script>
-    if (window.addEventListener) {
-      document.addEventListener('DOMContentLoaded', FillHtml(1));
-    }else if (window.attachEvent) {
-      document.attachEvent('onDOMContentLoaded', FillHtml(1));
-    }
+    window.onload = () => {
+      FillHtml(0);
+    };
+
     function FillHtml(tab){
       const item_container=document.getElementsByClassName("item-container")[tab];
-      if(item_container.textContent){
+      if(item_container.textContent.includes('价')){
         return;
       }
-      fetch('/amz/tabcontent'+tab+'.html')
+      fetch('../amz/tabcontent'+tab+'.html')
             .then(function(response) {
             return response.text();
         })
             .then(function(responsetext) {
             const parser = new DOMParser();
             const doc = parser.parseFromString(responsetext, "text/html");
-            const content=doc.innerHTML;
+            const content=doc.getElementsByTagName('div')[0].innerHTML;
             item_container.innerHTML=content;
         })
             .catch(function(err) {
             console.log(err);
         });
     }
+
     /*change tab*/
     function openTab(evt, tabIndex) {
       let i, tabcontent, tablinks;
@@ -177,7 +177,7 @@
 </head>
 
 <body>
-  <div class="logo"><img style="height:200px;" src="/amz/logo.png"></div>
+  <div class="logo"><img style="height:200px;" src="../amz/logo.png"></div>
 
   <div class="tab-body">
     <!-- 标签页部分 -->
