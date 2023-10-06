@@ -164,6 +164,10 @@
           const doc = parser.parseFromString(responsetext, "text/html");
           const content = doc.getElementsByTagName('div')[0].innerHTML;
           item_container.innerHTML = content;
+          const itemCards=item_container.getElementsByClassName('item-card');
+          for(const itemCard of itemCards){
+            itemCard.setAttribute('title',itemCard.getElementsByClassName('item-title')[0].textContent);
+          }
         })
         .catch(function (err) {
           console.log(err);
