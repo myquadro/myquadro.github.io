@@ -94,14 +94,8 @@
       width: 100%;
     }
 
-    .item-container {
-      display: flex;
-      flex-wrap: wrap;
-      /*justify-content: space-between;*/
-      width: 100%;
-    }
-
     .item-card {
+      display:inline-block;
       width: 200px;
       border: 1px #888 solid;
       border-radius: 5px;
@@ -137,7 +131,11 @@
     }
 
     .update-time{
-      color:#0000;
+      color:#bbb;
+    }
+    .update-time:before{
+      content:'更新于';
+      color:#bbb;
     }
 
     @media screen and (orientation: portrait) {
@@ -145,6 +143,8 @@
         width: 25vw;
         height: 100px;
         line-height: 100px;
+        font-size:50px;
+        border-radius: 100px 100px 0 0;
       }
     }
   </style>
