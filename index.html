@@ -58,12 +58,16 @@
 
         .taobao{
             font-size:30px;
-            display:inline-block;
             border:2px rgb(112,173,71) solid;
             border-radius:5px;
             padding:2px 4px;
-            cursor:pointer;
+            width: fit-content;
         }
+        .taobao>button{
+            margin-top:10px;
+            font-size:30px;
+        }
+
     </style>
     <script>
         window.addEventListener('load', changeImageWidth);
@@ -85,7 +89,7 @@
             }
         }
         function clip(t) {
-            const textToCopy = t.getAttribute('tb-code');
+            const textToCopy = t.parentNode.firstChild.textContent;
             navigator.clipboard.writeText(textToCopy).then(() => {
                 alert("内容已复制");
             }).catch(err => {
@@ -133,8 +137,7 @@
 
             <div class="yangmaochang" style="font-size:1.5em">
                 <span style="color:rgb(112,173,71)"><b>如何获取羊毛厂优惠？</b></span><br><br>
-                <b class="taobao"
-                    onclick="clip(this)" tb-code="8$Kmwe34zv7kO$:// CZ6135">点击此处复制淘口令、淘宝打开</b><br>
+                <div class="taobao"><span>8$Kmwe34zv7kO$:// CZ6135</span><br/><button onclick="clip(this)">复制淘口令</button></div>
                 <span style="color:rgb(112,173,71)">▼</span><br>
                 打开淘宝查看商品<br>
                 <span style="color:rgb(112,173,71)">▼</span><br>
@@ -161,7 +164,8 @@
 
             <p>扫描二维码或微信界面下长按二维码进入快团团小程序购买</p>
             <img src="2kuaituantuan2.webp" style="width:30%"/>
-            <p>或复制以下链接，发送微信信息给自己后打开<br>#小程序://快团团/iHVbB67txzMvnAi </p>
+            <p>或复制以下链接，发送微信信息给自己后打开</p>
+            <div class="taobao"><span>#小程序://快团团/iHVbB67txzMvnAi</span><br/><button onclick="clip(this)">复制小程序链接</button></div>
             <hr>
             <p>入群欢享“驯兽师羊毛厂”专属附加福利</p>
             <img src="4weixin.webp" style="display:inline-block;width:30%"/>
@@ -171,117 +175,117 @@
         <div class="tab-page">
             <div style="font-size:1.2em; "><b>玩法非常多样可以和爬架搭配使用，更推荐在室外玩！如果需要原版Staplestein玩法说明可以私信驯兽师</b></div>
             <img src="3shi.webp" style="width:50%"/>
-            <div tb-code="7輹👋Zhi9(2zkU34zrAjB):// CA1831,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>7輹👋Zhi9(2zkU34zrAjB):// CA1831,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab3-->
         <div class="tab-page">
             <div style="font-size:1.2em; "><b>可以让单杠旋转起来很好玩，也适合抓握力一般的崽崽过度，绳子还可以用在别的元素上<br>请选择1m可调节款</b></div>
             <img src="4dangang.webp" style="width:40%"/>
-            <div tb-code="0fu😄質0(T05434zIaYy):// MF3135,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>0fu😄質0(T05434zIaYy):// MF3135,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab4-->
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>尼龙绳</b></div>
             <div style="font-size:1.2em; "><b>做为吊桥的话5-6mm粗，10米均分成4段足够，还可以用来编织40x80的简易爬网</b></div>
             <img src="5sheng.webp" style="width:40%"/>
-            <div tb-code="1fu😄質9(d8wB34AXUgY):// CZ3457,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>1fu😄質9(d8wB34AXUgY):// CZ3457,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
              <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>弹力绳</b></div>
             <div style="font-size:1.2em; "><b>增加趣味性的话可以使用6mm粗的弹力绳来绑吊桥，做成蹦板</b></div>
             <img src="5tanli.webp" style="width:40%"/>
-            <div tb-code="9覆👋ZHI2(QtFZ34ztJ7f):// CA1371,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>9覆👋ZHI2(QtFZ34ztJ7f):// CA1371,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
              <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>自制爬网棉绳</b></div>
             <div style="font-size:1.2em;"><b>可以选择25mm的棉绳作为爬网，较粗踩起来比较舒服</b></div>
             <img src="5miansheng.webp" style="width:40%"/>
-            <div tb-code="0Fu😊zhi2(ypMv34zGknd):// MF3106,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>0Fu😊zhi2(ypMv34zGknd):// MF3106,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
              <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>成品爬网</b></div>
             <div style="font-size:1.2em; "><b>成品爬网可以用于多种场景：1）围栏防坠，2）爬网（有点偏软不适合垂直方向），3）吊床秋千<br>选择孔径5cm，3m，结网型，可以围合蹦床三面半</b></div>
-            <img src="5wang3.webp" style="display:inline-block;width:30%;heigth:80%"/>
+            <img src="5wang3.webp" style="display:inline-block;width:30%;height:80%"/>
             <img src="5wang1.webp" style="display:inline-block;width:30%"/>
             <img src="5wang2.webp" style="display:inline-block;width:30%"/>
-            <div tb-code="6fu😄質3(X55W3erODBv):// CA1831,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>6fu😄質3(X55W3erODBv):// CA1831,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab5-->
         <div class="tab-page">
             <div style="font-size:1.2em; "><b>Quadro是使用6cm直径的球装八分满2x2的40大板的球池，此链接是7cm的球200个左右足够半板球池</b></div>
             <img src="6haiyangqiu.webp" style="width:40%"/>
-            <div tb-code="7輹👋Zhi4(749Q34zCxhe):// MF1001,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>7輹👋Zhi4(749Q34zCxhe):// MF1001,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab6-->
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>软秋千</b></div>
             <div style="font-size:1.2em; "><b>适合小娃，样式方便收纳不占空间</b></div>
             <img src="7qiuqian1.webp" style="width:40%"/>
-            <div tb-code="7輹👋Zhi4(wgmD34zBVtM):// CA1371,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>7輹👋Zhi4(wgmD34zBVtM):// CA1371,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>定型秋千</b></div>
             <div style="font-size:1.2em; "><b>小泰克适合小娃，很多小伙伴选择的款式，优点是定型，缺点是不方便收纳</b></div>
             <img src="7qiuqian3.webp" style="width:40%"/>
-            <div tb-code="0Fu😊zhi6(CFox34zFyN1):// CA1710,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>0Fu😊zhi6(CFox34zFyN1):// CA1710,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>板子秋千</b></div>
             <div style="font-size:1.2em; "><b>适合大娃，简单方便易收纳，也可以直接用15*35的半板搭建</b></div>
             <img src="7qiuqian2.webp" style="width:40%"/>
-            <div tb-code="7覆👋ZHI3(L1q634zzjmj):// CZ6144,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>7覆👋ZHI3(L1q634zzjmj):// CZ6144,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab7-->
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>Lego原版底板</b></div>
             <div style="font-size:1.2em; "><b>得宝Duplo大颗粒积木使用，可以使用纳米胶固定，如果是水平放置两侧有两个1左右的点就不会动了</b></div>
             <img src="8lego.webp" style="width:40%"/>
-            <div tb-code="8覆👋ZHI5(0XCb34zEiGo):// CZ6144,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>8覆👋ZHI5(0XCb34zEiGo):// CZ6144,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>平替底板，适配得宝</b></div>
             <img src="8jimuban.webp" style="width:40%"/>
-            <div tb-code="8輹👋Zhi1(Dawc34zBHLp):// CZ3148,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>8輹👋Zhi1(Dawc34zBHLp):// CZ3148,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab8-->
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>适配方形箱子</b></div>
             <div style="font-size:1.2em; "><b>Vessla这个尺寸可以卡在35x35cm的框架里，带上盖子就可以收纳，这种塑料的更适合玩沙子做感观盆</b></div>
             <img src="9penzi.webp" style="width:40%"/>
-            <div tb-code="5覆👋ZHI6(IwEh34zzMc7):// HU7177,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>5覆👋ZHI6(IwEh34zzMc7):// HU7177,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>作为可以放在架子上的收纳，更推荐以下两种</b></div>
             <div style="font-size:1.2em; "><b>xhs@慧慧为什么推荐(推荐理由：比较小巧，方便分类收纳，一个35方格可以放两个，比较矮有空位，方便宝贝自己拿取）</b></div>
             <img src="9shouna3.webp" style="display:inline-block;width:50%"/>
             <img src="9shouna4.webp" style="display:inline-block;width:50%"/>
-            <div tb-code="9Fu😊zhi6(YJCN34zxkAJ):// MU6304,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>9Fu😊zhi6(YJCN34zxkAJ):// MU6304,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.2em; "><b>推荐理由：尺寸比较严丝合缝，适合放需要防尘的物件，比如玩偶</b></div>
             <img src="9shouna5.webp" style="width:40%"/>
             <img src="9shouna2.webp" style="width:40%"/>
-            <div tb-code="8覆👋ZHI1(mbV234zCyXZ):// CZ3457,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div> 
+            <div class="taobao"><span>8覆👋ZHI1(mbV234zCyXZ):// CZ3457,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab9-->
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>扎带</b></div>
             <div style="font-size:1.2em; "><b>尺寸请选择8x350x400 经典色请选择深蓝色/红色/黄色/绿色</b></div>
             <img src="10zhadai.webp" style="width:40%"/>
-            <div tb-code="8fu😄質1(2kQj34zE72x):// MF3135,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>8fu😄質1(2kQj34zE72x):// MF3135,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>玻璃蜡笔</b></div>
             <div style="font-size:1.2em;"><b>在亚克力板上显色较为清楚，容易擦洗</b></div>
             <img src="10bi.webp" style="display:inline-block;width:40%"/>
             <img src="10bi2.webp" style="display:inline-block;width:40%"/>
-            <div tb-code="3覆👋ZHI8(vNYy34zDP3E):// MU6304,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>3覆👋ZHI8(vNYy34zDP3E):// MU6304,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab10-->
         <div class="tab-page">
             <div style="font-size:1.2em; "><b>请联系客服选择外径27mm,长度为78cm的铝管，4根是60元，6根是58元</b></div>
             <img src="11lvguan.webp" style="width:40%"/>
-            <div tb-code=0Fu😊zhi7(NAfW34zwnUZ):// CA1831,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>0Fu😊zhi7(NAfW34zwnUZ):// CA1831,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab11-->
         <div class="tab-page">
@@ -290,47 +294,47 @@
             <br>
             <div style="font-size:1.2em; ">1|吉祥如意小裁缝|<br>特点是圆形通用孔洞、细磨砂质地、和Quadro大板尺寸完全一致可以严丝合缝链接、对边固定空洞、面板大螺丝固定、整体相对轻便。</div>
             <img src="12dongdongban5.webp" style="width:40%"/>
-            <div linka="https://m.tb.cn/h.gncFHcL?tk=uhYx3fMk5OK HU904" class="taobao" onclick="clip(this)">点此复制链接，浏览器地址栏中粘贴打开</div>
+            <div class="taobao"><span>https://m.tb.cn/h.gncFHcL?tk=uhYx3fMk5OK HU904</span><br/><button onclick="clip(this)">复制链接，粘贴到浏览器地址栏打开</button></div>
             <br>
             <br>
             <div style="font-size:1.2em; ">|哎哟妈呀|<br>特点是宜家长孔、光面、适配Quadro及所有国产、四边固定孔洞、面板大螺丝固定、板面比较厚实。</div>
             <img src="12dongdongban4.webp" style="width:45%"/>
-            <div tb-code="https://m.tb.cn/h.gnXYrbem9C0XWan?tk=hIoZ3fMHeFY MF3543 " class="taobao" onclick="clip(this)">点此复制链接，打开淘宝App查看商品</div>
+            <div class="taobao"><span>https://m.tb.cn/h.gnXYrbem9C0XWan?tk=hIoZ3fMHeFY MF3543 </span><br/><button onclick="clip(this)">复制链接，粘贴到浏览器地址栏打开</button></div>
             <br>
             <br>            
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>洞洞板周边配件</b></div>
             <div style="font-size:1.2em; "><b>木质磁性字母贴，需要自己把磁条贴上，但很简单</b></div>
             <img src="12dongdongban1.webp" style="width:40%"/>
-            <div tb-code="1輹👋Zhi7(MHp634zwQ3o):// CA1710,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>1輹👋Zhi7(MHp634zwQ3o):// CA1710,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.2em; "><b>吸力比较好的小可爱磁铁</b></div>
             <img src="12dongdongban3.webp" style="width:40%"/>
-            <div tb-code="6fu😄質9(b6Xe34zEnw5):// MU5183,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>6fu😄質9(b6Xe34zEnw5):// MU5183,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
              <div style="font-size:1.2em; "><b>车辆磁力贴，崽崽很喜欢，但单词翻译不是很完美</b></div>
             <img src="12dongdongban2.webp" style="width:40%"/>
-            <div tb-code="7覆👋ZHI6(6nrQ34zEg8H):// HU7177,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>7覆👋ZHI6(6nrQ34zEg8H):// HU7177,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
          <!--end of tab12-->   
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>纯棉地毯</b></div>
             <div style="font-size:1.2em; "><b>可以进洗衣机清洗，可以彻底清洁，好收纳，但缓冲相对差一些</b></div>
             <img src="13ditan1.webp" style="width:40%"/>
-            <div tb-code="4fu😄質8(APN534ztrjo):// CA1371,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>4fu😄質8(APN534ztrjo):// CA1371,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>          
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>曼龙地垫</b></div>
             <div style="font-size:1.2em; "><b>弹性很好，方便清洁，适合小娃，但不是很好收纳*羊毛厂快团团价格更美丽</b></div>
             <img src="13ditan2.webp" style="width:40%"/>
-            <div tb-code="6覆👋ZHI5(N80334ztJ3F):// MF3084,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>6覆👋ZHI5(N80334ztJ3F):// MF3084,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>东理地毯</b></div>
             <div style="font-size:1.2em; "><b>颜值很高可以随意拼装，较好收纳，但打理相较前两种比较困难</b></div>
             <img src="13ditan3.webp" style="width:40%"/>
-            <div tb-code="4fu😄質null MF3084,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>4fu😄質null MF3084,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
          <!--end of tab13-->  
         <div class="tab-page">
@@ -341,7 +345,7 @@
                <span style="text-decoration:underline;font-size:1.8em;">点击打开1688链接</span>
             </a>
              <br>
-            <div tb-code="7輹👋Zhi9(e6Lm3ermS8Z):// ZH9102,打開/" class="taobao" onclick="clip(this)">点此复制淘口令，打开淘宝App查看商品</div>
+            <div class="taobao"><span>7輹👋Zhi9(e6Lm3ermS8Z):// ZH9102,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab14-->
         <div class="tab-page">
