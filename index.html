@@ -87,18 +87,10 @@
         function clip(t) {
             const textToCopy = t.getAttribute('tb-code');
             navigator.clipboard.writeText(textToCopy).then(() => {
-                alert("淘口令已复制，请打开淘宝app查看详情");
+                alert("内容已复制");
             }).catch(err => {
                 console.error('复制失败', err);
             });
-        }
-        function clip(t) {
-            const textToCopy = t.getAttribute('linKa');
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                alert("链接已复制，请复制到浏览器地址栏中查看详情");
-            }).catch(err => {
-                console.error('复制失败', err);
-            }); 
         }
     </script>
 </head>
