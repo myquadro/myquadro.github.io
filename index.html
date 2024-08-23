@@ -91,14 +91,14 @@
             }).catch(err => {
                 console.error('复制失败', err);
             });
-            
+        }
         function clip(t) {
             const textToCopy = t.getAttribute('linKa');
             navigator.clipboard.writeText(textToCopy).then(() => {
                 alert("链接已复制，请复制到浏览器地址栏中查看详情");
             }).catch(err => {
                 console.error('复制失败', err);
-            });
+            }); 
         }
     </script>
 </head>
