@@ -91,6 +91,14 @@
             }).catch(err => {
                 console.error('复制失败', err);
             });
+            
+        function clip(t) {
+            const textToCopy = t.getAttribute('linKa');
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert("链接已复制，请复制到浏览器地址栏中查看详情");
+            }).catch(err => {
+                console.error('复制失败', err);
+            });
         }
     </script>
 </head>
@@ -290,7 +298,7 @@
              <br>
             <div style="font-size:1.2em; ">1|吉祥如意小裁缝|特点是圆形通用孔洞、细磨砂质地、环保喷塑、和Quadro大板尺寸一致可以严丝合缝链接、对边固定空洞、面板大螺丝固定、整体相对轻便。</div>
             <img src="12dongdongban5.webp" style="width:40%"/>
-            <div tb-code="https://m.tb.cn/h.gncFHcL?tk=uhYx3fMk5OK HU904" class="taobao" onclick="clip(this)">点此复制链接，浏览器地址栏中粘贴打开</div>
+            <div linka="https://m.tb.cn/h.gncFHcL?tk=uhYx3fMk5OK HU904" class="taobao" onclick="clip(this)">点此复制链接，浏览器地址栏中粘贴打开</div>
              <br>
             <div style="font-size:1.2em; ">|哎哟妈呀|特点是宜家长孔、喷塑光面、四边固定孔洞、面板大螺丝固定、板面比较厚实。</div>
             <img src="12dongdongban4.webp" style="width:40%"/>
