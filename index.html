@@ -96,10 +96,41 @@
                 console.error('复制失败', err);
             });
         }
+        /*display qrcode*/
+      const qrcode = getCookie('qrmini');
+      if (qrcode == '') {
+        document.getElementById('qrcodewx').style.display = 'block';
+      } else {
+        minimal();
+      }
     </script>
 </head>
 
 <body>
+    
+  <div id='mirror-link'></div>
+
+  <div id='qrcodewx'
+    style="transition:0.5s;display:none;position:fixed;left:10vw;top:10vh;width:80vw;height:80vh;background:#ffe;overflow-y: scroll;">
+    <div id="qrcode-head" style="transition:0.5s;">
+      <span style="border:1px solid grey;font-size:2em;width:1.6em;cursor:pointer;float: right;text-align:center;"
+        onclick="minimal();">&#8599;</span>
+    </div>
+    <div id='qrcode-body' style="transition:0.5s;height:80vh;">
+      <div style="font-size:1.8em;" class="coupon">
+        &#127873;<span class="lang-en"><span style="font-weight:700;">Coupon</span> for quadro shop</span><span
+          class="lang-ch">官网优惠码</span>
+        <br>
+        <a href="https://quadrotoys.com/?ref=cheryl"><span class="lang-en" style="text-decoration:underline;">North
+            America: </span><span class="lang-ch" style="text-decoration:underline;">北美：</span></a>cheryl_usa_15
+      </div>
+      <br><span style="font-size:1.8em;">微信扫码入群 解锁更多玩法</span><br>
+      <img alt='qrcode' style='height:50%;' src='4weixin.webp'>
+      <br><span style="font-size:1.8em;">关注|羊毛厂|快团团 有更多惊喜美价物品分享</span><br>
+      <img alt='qrcode' style='height:20%;' src='1kttzy.webp'>
+    </div>
+  </div>
+        
     <div class="logo">
         <img src="logo.webp" style="width:60%" />
     </div>
@@ -303,6 +334,17 @@
             <br>
             <br>            
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>洞洞板周边配件</b></div>
+            <div style="font-size:1.2em; "><b>适配|吉祥如意小裁缝|洞洞板的配件</b></div>
+            <img src="12pj1.webp" style="display:inline-block;width:18%"/>
+            <img src="12pj2.webp" style="display:inline-block;width:18%"/>
+            <div class="taobao"><span>8覆👋ZHI9(3uWb3UNtYCg):// ZH9102,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <br>
+            <br>
+            <div style="font-size:1.2em; "><b>适配|哎哟妈呀|洞洞板的配件</b></div>
+            <img src="12pj3.webp" style="width:40%"/>
+            <div class="taobao"><span>8輹👋Zhi4(i4yx3UNtLoD):// CA1371,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <br>
+            <br>
             <div style="font-size:1.2em; "><b>木质磁性字母贴，需要自己把磁条贴上，但很简单</b></div>
             <img src="12dongdongban1.webp" style="width:40%"/>
             <div class="taobao"><span>1輹👋Zhi7(MHp634zwQ3o):// CA1710,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
@@ -326,8 +368,9 @@
             <br>
             <br>          
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>曼龙地垫</b></div>
-            <div style="font-size:1.2em; "><b>弹性很好，方便清洁，适合小娃，但不是很好收纳*羊毛厂快团团价格更美丽</b></div>
+            <div style="font-size:1.2em; "><b>弹性很好，方便清洁，适合小娃，但不是很好收纳</b></div>
             <img src="13ditan2.webp" style="width:40%"/>
+            <div style="font-size:1.2em; "><b>羊毛厂快团团价格更加美丽，别错过</b></div>
             <div class="taobao"><span>6覆👋ZHI5(N80334ztJ3F):// MF3084,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
