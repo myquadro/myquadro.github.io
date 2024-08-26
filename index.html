@@ -103,6 +103,39 @@
       } else {
         minimal();
       }
+         /*minimal & display qrcode*/
+    function minimal() {
+      const temp = getCookie('qrmini');
+      if (temp == '') {
+        setCookie('qrmini', 1, 1000);
+      }
+      document.getElementById('qrcodewx').style.position = 'absolute';
+      document.getElementById('qrcodewx').style.top = '-35vh';
+      document.getElementById('qrcodewx').style.left = '40%';
+      document.getElementById('qrcodewx').style.transform = 'scale(0.07)';
+      document.getElementById('qrcodewx').style.background = 'transparent';
+      setTimeout(() => {
+        document.getElementById('qrcode-head').style.display = 'none';
+        document.getElementById('qrcode-body').style.display = 'none';
+        document.getElementById('qrcode-mini').style.display = 'inline-block';
+        document.getElementById('qrcodewx').style.display = 'none';
+      }, "500");
+    }
+    function maximal() {
+      document.getElementById('qrcodewx').style.display = 'block';
+      document.getElementById('qrcode-mini').style.display = 'none';
+      document.getElementById('qrcode-head').style.display = 'block';
+      document.getElementById('qrcode-body').style.display = 'block';
+      document.getElementById('qrcodewx').style.background = 'white';
+      document.getElementById('qrcodewx').style.top = '10vh';
+      document.getElementById('qrcodewx').style.left = '10vw';
+      document.getElementById('qrcodewx').style.transform = 'scale(1)';
+      document.getElementById('qrcodewx').style.position = 'fixed';
+    }
+    function isWechat() {
+      return /MicroMessenger/i.test(window.navigator.userAgent);
+    }
+
     </script>
 </head>
 
