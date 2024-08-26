@@ -6,9 +6,10 @@
     <meta name="keywords" content="攀爬架, 爬爬架, quadro, 吞金兽驯兽师，驯兽师羊毛厂">
     <meta name="apple-mobile-web-app-title" content="羊毛厂">
     <style>
-        body{
-            font-size:24px;
+        body {
+            font-size: 24px;
         }
+
         .tab-btn {
             cursor: pointer;
             display: inline-block;
@@ -41,39 +42,75 @@
             border-radius: 10px;
             padding: 10px 20px;
             width: 50%;
-            margin:10px;
+            margin: 10px;
         }
 
         .tab-page>img {
-            display:block;
+            display: block;
             width: 90vw;
             max-height: 90vh;
-            object-fit:contain;
+            object-fit: contain;
         }
 
-        a{
-            cursor:pointer;
-            font-size:20px;
+        a {
+            cursor: pointer;
+            font-size: 20px;
         }
 
-        .taobao{
-            font-size:30px;
-            border:2px rgb(112,173,71) solid;
-            border-radius:5px;
-            padding:2px 4px;
+        .taobao {
+            font-size: 30px;
+            border: 2px rgb(112, 173, 71) solid;
+            border-radius: 5px;
+            padding: 2px 4px;
             width: fit-content;
         }
-        .taobao>button{
-            margin-top:10px;
-            font-size:30px;
+
+        .taobao>button {
+            margin-top: 10px;
+            font-size: 30px;
         }
 
+        #qrcode-mini {
+            position: fixed;
+            top: 10px;
+            right: 50px;
+            display: none;
+            width: 30px;
+            height: 30px;
+            font-size: 2em;
+            cursor: pointer;
+        }
+
+        #qrcodewx {
+            transition: 0.5s;
+            display: none;
+            position: fixed;
+            left: 10vw;
+            top: 10vh;
+            width: 80vw;
+            height: 80vh;
+            background: #ffe;
+            overflow-y: scroll;
+            border: 2px solid grey;
+        }
     </style>
     <script>
-        window.addEventListener('load', changeImageWidth);
-        function changeImageWidth(){
-
+        if (window.addEventListener) {
+            document.addEventListener('DOMContentLoaded', main);
+        } else if (window.attachEvent) {
+            document.attachEvent('onDOMContentLoaded', main);
         }
+
+        function main() {
+            /*display qrcode*/
+            const qrcode = localStorage.getItem('qrmini');
+            if (qrcode == '1') {
+                minimal();
+            } else {
+                document.getElementById('qrcodewx').style.display = 'block';
+            }
+        }
+
         function showTab(n) {
             const tabBtns = document.getElementsByClassName("tab-btn");
             const tabPages = document.getElementsByClassName("tab-page");
@@ -96,74 +133,57 @@
                 console.error('复制失败', err);
             });
         }
-        /*display qrcode*/
-      const qrcode = getCookie('qrmini');
-      if (qrcode == '') {
-        document.getElementById('qrcodewx').style.display = 'block';
-      } else {
-        minimal();
-      }
-         /*minimal & display qrcode*/
-    function minimal() {
-      const temp = getCookie('qrmini');
-      if (temp == '') {
-        setCookie('qrmini', 1, 1000);
-      }
-      document.getElementById('qrcodewx').style.position = 'absolute';
-      document.getElementById('qrcodewx').style.top = '-35vh';
-      document.getElementById('qrcodewx').style.left = '40%';
-      document.getElementById('qrcodewx').style.transform = 'scale(0.07)';
-      document.getElementById('qrcodewx').style.background = 'transparent';
-      setTimeout(() => {
-        document.getElementById('qrcode-head').style.display = 'none';
-        document.getElementById('qrcode-body').style.display = 'none';
-        document.getElementById('qrcode-mini').style.display = 'inline-block';
-        document.getElementById('qrcodewx').style.display = 'none';
-      }, "500");
-    }
-    function maximal() {
-      document.getElementById('qrcodewx').style.display = 'block';
-      document.getElementById('qrcode-mini').style.display = 'none';
-      document.getElementById('qrcode-head').style.display = 'block';
-      document.getElementById('qrcode-body').style.display = 'block';
-      document.getElementById('qrcodewx').style.background = 'white';
-      document.getElementById('qrcodewx').style.top = '10vh';
-      document.getElementById('qrcodewx').style.left = '10vw';
-      document.getElementById('qrcodewx').style.transform = 'scale(1)';
-      document.getElementById('qrcodewx').style.position = 'fixed';
-    }
-    function isWechat() {
-      return /MicroMessenger/i.test(window.navigator.userAgent);
-    }
 
+        /*minimal & display qrcode*/
+        function minimal() {
+            localStorage.setItem('qrmini', '1');
+            document.getElementById('qrcodewx').style.position = 'absolute';
+            document.getElementById('qrcodewx').style.top = '-35vh';
+            document.getElementById('qrcodewx').style.left = '40%';
+            document.getElementById('qrcodewx').style.transform = 'scale(0.07)';
+            document.getElementById('qrcodewx').style.background = 'transparent';
+            setTimeout(() => {
+                //document.getElementById('qrcode-head').style.display = 'none';
+                //document.getElementById('qrcode-body').style.display = 'none';
+                document.getElementById('qrcode-mini').style.display = 'inline-block';
+                document.getElementById('qrcodewx').style.display = 'none';
+            }, "500");
+        }
+        function maximal() {
+            document.getElementById('qrcodewx').style.display = 'block';
+            document.getElementById('qrcode-mini').style.display = 'none';
+            //document.getElementById('qrcode-head').style.display = 'block';
+            //document.getElementById('qrcode-body').style.display = 'block';
+            document.getElementById('qrcodewx').style.background = 'white';
+            document.getElementById('qrcodewx').style.top = '10vh';
+            document.getElementById('qrcodewx').style.left = '10vw';
+            document.getElementById('qrcodewx').style.transform = 'scale(1)';
+            document.getElementById('qrcodewx').style.position = 'fixed';
+        }
     </script>
 </head>
 
 <body>
-    
-  <div id='mirror-link'></div>
+    <div id="qrcode-mini" onclick='maximal();'>&#127873;</div>
+    <div id='qrcodewx'>
+        <div id="qrcode-head">
+            <span style="border:1px solid grey;font-size:2em;width:1.6em;cursor:pointer;float: right;text-align:center;"
+                onclick="minimal();">&#8599;</span>
+        </div>
+        <div id='qrcode-body' style="height:80vh;">
+            <div style="font-size:1.8em;" class="coupon">
+                &#127873;Quadro官网优惠码
+                <br>
+                <a href="https://quadrotoys.com/?ref=cheryl"><span style="text-decoration:underline;">北美：
+                    </span></a>cheryl_usa_15
+            </div>
+            <br><span style="font-size:1.8em;">扫码加微信了解更多优惠信息</span><br>
+            <img alt='wechat qrcode' style='height:80%;' src='4weixin.webp'>
+            <br><span style="font-size:1.8em;">关注|羊毛厂|快团团 有更多惊喜美价物品分享</span><br>
+            <img alt='kuaituantuan qrcode' style='height:80%;' src='1kttzy.webp'>
+        </div>
+    </div>
 
-  <div id='qrcodewx'
-    style="transition:0.5s;display:none;position:fixed;left:10vw;top:10vh;width:80vw;height:80vh;background:#ffe;overflow-y: scroll;">
-    <div id="qrcode-head" style="transition:0.5s;">
-      <span style="border:1px solid grey;font-size:2em;width:1.6em;cursor:pointer;float: right;text-align:center;"
-        onclick="minimal();">&#8599;</span>
-    </div>
-    <div id='qrcode-body' style="transition:0.5s;height:80vh;">
-      <div style="font-size:1.8em;" class="coupon">
-        &#127873;<span class="lang-en"><span style="font-weight:700;">Coupon</span> for quadro shop</span><span
-          class="lang-ch">官网优惠码</span>
-        <br>
-        <a href="https://quadrotoys.com/?ref=cheryl"><span class="lang-en" style="text-decoration:underline;">North
-            America: </span><span class="lang-ch" style="text-decoration:underline;">北美：</span></a>cheryl_usa_15
-      </div>
-      <br><span style="font-size:1.8em;">微信扫码入群 解锁更多玩法</span><br>
-      <img alt='qrcode' style='height:50%;' src='4weixin.webp'>
-      <br><span style="font-size:1.8em;">关注|羊毛厂|快团团 有更多惊喜美价物品分享</span><br>
-      <img alt='qrcode' style='height:20%;' src='1kttzy.webp'>
-    </div>
-  </div>
-        
     <div class="logo">
         <img src="logo.webp" style="width:60%" />
     </div>
@@ -177,31 +197,32 @@
         <div class="tab-btn" onclick="showTab(6)">选品07<br>秋千</div>
         <div class="tab-btn" onclick="showTab(7)">选品08<br>大颗粒积木板</div>
         <div class="tab-btn" onclick="showTab(8)">选品09<br>游戏/收纳盒</div>
-        <div class="tab-btn" onclick="showTab(9)">选品10<br>亚克力相关</div> 
-        <div class="tab-btn" onclick="showTab(10)">选品11<br>铝管</div> 
-        <div class="tab-btn" onclick="showTab(11)">选品12<br>金属洞洞板</div> 
+        <div class="tab-btn" onclick="showTab(9)">选品10<br>亚克力相关</div>
+        <div class="tab-btn" onclick="showTab(10)">选品11<br>铝管</div>
+        <div class="tab-btn" onclick="showTab(11)">选品12<br>金属洞洞板</div>
         <div class="tab-btn" onclick="showTab(12)">选品13<br>地垫</div>
         <div class="tab-btn" onclick="showTab(13)">选品14<br>配件收纳</div>
         <div class="tab-btn" onclick="showTab(14)">选品15<br>彩虹门</div>
     </div>
     <div class="tab-page-area">
         <div class="tab-page active">
-            
+
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>商家介绍</b></div>
             <div style="font-size:1.2em; "><b>德国Quadro授权的中国市场经销商，原装正品，在淘宝上进行交易，国内现货，发货迅速，有靠谱的售后。</b></div>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>限时优惠活动</b></div>
             暂无
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>羊毛厂专属优惠</b></div>
-             <img src="1taobao.webp" style="width:80%"/>
+            <img src="1taobao.webp" style="width:80%" />
             <p>优惠价格详情，请咨询吞金兽驯兽师小红书<br>或使用下面二维码+驯兽师羊毛厂微信或群聊</p>
-            <img src="4weixin.webp" style="display:inline-block;width:30%"/>
-            <img src="1weixinqun.webp" style="display:inline-block;width:30%"/>
+            <img src="4weixin.webp" style="display:inline-block;width:30%" />
+            <img src="1weixinqun.webp" style="display:inline-block;width:30%" />
             <hr>
             <div style="font-size:1.2em; "><b>如果链接失效，请私信告知领取新的链接，谢谢！。</b></div>
             <div class="yangmaochang" style="font-size:1.5em">
                 <span style="color:rgb(112,173,71)"><b>如何获取羊毛厂优惠？</b></span><br><br>
-                <div class="taobao"><span>8$Kmwe34zv7kO$:// CZ6135</span><br/><button onclick="clip(this)">复制淘口令</button></div>
+                <div class="taobao"><span>8$Kmwe34zv7kO$:// CZ6135</span><br /><button
+                        onclick="clip(this)">复制淘口令</button></div>
                 <span style="color:rgb(112,173,71)">▼</span><br>
                 打开淘宝查看商品<br>
                 <span style="color:rgb(112,173,71)">▼</span><br>
@@ -218,232 +239,282 @@
 
         </div>
         <!--end of tab1-->
+
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>羊毛厂专属优惠</b></div>
-            <div style="font-size:1.2em; "><b>大兽套装融合了EVO和Clup的优点并做了进一步优化，非常合适DIY，优惠力度很好，适合新手入门。<br>小兽套装比较小，但兼容性也不错，适合尝新。<br>羊毛包作为小扩展包可以无脑入，比例很合适。</b></div>
-            <img src="2yangmao.webp" style="width:80%"/>
+            <div style="font-size:1.2em; ">
+                <b>大兽套装融合了EVO和Clup的优点并做了进一步优化，非常合适DIY，优惠力度很好，适合新手入门。<br>小兽套装比较小，但兼容性也不错，适合尝新。<br>羊毛包作为小扩展包可以无脑入，比例很合适。</b>
+            </div>
+            <img src="2yangmao.webp" style="width:80%" />
 
             <p>扫描二维码或微信界面下长按二维码进入快团团小程序购买</p>
-            <img src="2kuaituantuan2.webp" style="width:30%"/>
+            <img src="2kuaituantuan2.webp" style="width:30%" />
             <p>或复制以下链接，发送微信信息给自己后打开</p>
-            <div class="taobao"><span>#小程序://快团团/iHVbB67txzMvnAi</span><br/><button onclick="clip(this)">复制小程序链接</button></div>
+            <div class="taobao"><span>#小程序://快团团/iHVbB67txzMvnAi</span><br /><button
+                    onclick="clip(this)">复制小程序链接</button></div>
             <hr>
             <p>入群欢享“驯兽师羊毛厂”专属附加福利</p>
-            <img src="4weixin.webp" style="display:inline-block;width:30%"/>
-            <img src="1weixinqun.webp" style="display:inline-block;width:30%"/>
+            <img src="4weixin.webp" style="display:inline-block;width:30%" />
+            <img src="1weixinqun.webp" style="display:inline-block;width:30%" />
         </div>
         <!--end of tab2-->
+
         <div class="tab-page">
             <div style="font-size:1.2em; "><b>玩法非常多样可以和爬架搭配使用，更推荐在室外玩！如果需要原版Staplestein玩法说明可以私信驯兽师</b></div>
-            <img src="3shi.webp" style="width:50%"/>
-            <div class="taobao"><span>7輹👋Zhi9(2zkU34zrAjB):// CA1831,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="3shi.webp" style="width:50%" />
+            <div class="taobao"><span>7輹👋Zhi9(2zkU34zrAjB):// CA1831,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab3-->
+
         <div class="tab-page">
             <div style="font-size:1.2em; "><b>可以让单杠旋转起来很好玩，也适合抓握力一般的崽崽过度，绳子还可以用在别的元素上<br>请选择1m可调节款</b></div>
-            <img src="4dangang.webp" style="width:40%"/>
-            <div class="taobao"><span>0fu😄質0(T05434zIaYy):// MF3135,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="4dangang.webp" style="width:40%" />
+            <div class="taobao"><span>0fu😄質0(T05434zIaYy):// MF3135,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab4-->
+
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>尼龙绳</b></div>
             <div style="font-size:1.2em; "><b>做为吊桥的话5-6mm粗，10米均分成4段足够，还可以用来编织40x80的简易爬网</b></div>
-            <img src="5sheng.webp" style="width:40%"/>
-            <div class="taobao"><span>1fu😄質9(d8wB34AXUgY):// CZ3457,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
-             <br>
+            <img src="5sheng.webp" style="width:40%" />
+            <div class="taobao"><span>1fu😄質9(d8wB34AXUgY):// CZ3457,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>弹力绳</b></div>
             <div style="font-size:1.2em; "><b>增加趣味性的话可以使用6mm粗的弹力绳来绑吊桥，做成蹦板</b></div>
-            <img src="5tanli.webp" style="width:40%"/>
-            <div class="taobao"><span>9覆👋ZHI2(QtFZ34ztJ7f):// CA1371,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
-             <br>
+            <img src="5tanli.webp" style="width:40%" />
+            <div class="taobao"><span>9覆👋ZHI2(QtFZ34ztJ7f):// CA1371,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>自制爬网棉绳</b></div>
             <div style="font-size:1.2em;"><b>可以选择25mm的棉绳作为爬网，较粗踩起来比较舒服</b></div>
-            <img src="5miansheng.webp" style="width:40%"/>
-            <div class="taobao"><span>0Fu😊zhi2(ypMv34zGknd):// MF3106,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
-             <br>
+            <img src="5miansheng.webp" style="width:40%" />
+            <div class="taobao"><span>0Fu😊zhi2(ypMv34zGknd):// MF3106,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>成品爬网</b></div>
-            <div style="font-size:1.2em; "><b>成品爬网可以用于多种场景：1）围栏防坠，2）爬网（有点偏软不适合垂直方向），3）吊床秋千<br>选择孔径5cm，3m，结网型，可以围合蹦床三面半</b></div>
-            <img src="5wang3.webp" style="display:inline-block;width:30%;height:80%"/>
-            <img src="5wang1.webp" style="display:inline-block;width:30%"/>
-            <img src="5wang2.webp" style="display:inline-block;width:30%"/>
-            <div class="taobao"><span>6fu😄質3(X55W3erODBv):// CA1831,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <div style="font-size:1.2em; ">
+                <b>成品爬网可以用于多种场景：1）围栏防坠，2）爬网（有点偏软不适合垂直方向），3）吊床秋千<br>选择孔径5cm，3m，结网型，可以围合蹦床三面半</b>
+            </div>
+            <img src="5wang3.webp" style="display:inline-block;width:30%;height:80%" />
+            <img src="5wang1.webp" style="display:inline-block;width:30%" />
+            <img src="5wang2.webp" style="display:inline-block;width:30%" />
+            <div class="taobao"><span>6fu😄質3(X55W3erODBv):// CA1831,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab5-->
+
         <div class="tab-page">
             <div style="font-size:1.2em; "><b>Quadro是使用6cm直径的球装八分满2x2的40大板的球池，此链接是7cm的球200个左右足够半板球池</b></div>
-            <img src="6haiyangqiu.webp" style="width:40%"/>
-            <div class="taobao"><span>7輹👋Zhi4(749Q34zCxhe):// MF1001,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="6haiyangqiu.webp" style="width:40%" />
+            <div class="taobao"><span>7輹👋Zhi4(749Q34zCxhe):// MF1001,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab6-->
+
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>软秋千</b></div>
             <div style="font-size:1.2em; "><b>适合小娃，样式方便收纳不占空间</b></div>
-            <img src="7qiuqian1.webp" style="width:40%"/>
-            <div class="taobao"><span>7輹👋Zhi4(wgmD34zBVtM):// CA1371,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="7qiuqian1.webp" style="width:40%" />
+            <div class="taobao"><span>7輹👋Zhi4(wgmD34zBVtM):// CA1371,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>定型秋千</b></div>
             <div style="font-size:1.2em; "><b>小泰克适合小娃，很多小伙伴选择的款式，优点是定型，缺点是不方便收纳</b></div>
-            <img src="7qiuqian3.webp" style="width:40%"/>
-            <div class="taobao"><span>0Fu😊zhi6(CFox34zFyN1):// CA1710,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="7qiuqian3.webp" style="width:40%" />
+            <div class="taobao"><span>0Fu😊zhi6(CFox34zFyN1):// CA1710,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>板子秋千</b></div>
             <div style="font-size:1.2em; "><b>适合大娃，简单方便易收纳，也可以直接用15*35的半板搭建</b></div>
-            <img src="7qiuqian2.webp" style="width:40%"/>
-            <div class="taobao"><span>7覆👋ZHI3(L1q634zzjmj):// CZ6144,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="7qiuqian2.webp" style="width:40%" />
+            <div class="taobao"><span>7覆👋ZHI3(L1q634zzjmj):// CZ6144,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab7-->
+
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>Lego原版底板</b></div>
             <div style="font-size:1.2em; "><b>得宝Duplo大颗粒积木使用，可以使用纳米胶固定，如果是水平放置两侧有两个1左右的点就不会动了</b></div>
-            <img src="8lego.webp" style="width:40%"/>
-            <div class="taobao"><span>8覆👋ZHI5(0XCb34zEiGo):// CZ6144,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="8lego.webp" style="width:40%" />
+            <div class="taobao"><span>8覆👋ZHI5(0XCb34zEiGo):// CZ6144,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>平替底板，适配得宝</b></div>
-            <img src="8jimuban.webp" style="width:40%"/>
-            <div class="taobao"><span>8輹👋Zhi1(Dawc34zBHLp):// CZ3148,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="8jimuban.webp" style="width:40%" />
+            <div class="taobao"><span>8輹👋Zhi1(Dawc34zBHLp):// CZ3148,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab8-->
+
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>适配方形箱子</b></div>
             <div style="font-size:1.2em; "><b>Vessla这个尺寸可以卡在35x35cm的框架里，带上盖子就可以收纳，这种塑料的更适合玩沙子做感观盆</b></div>
-            <img src="9penzi.webp" style="width:40%"/>
-            <div class="taobao"><span>5覆👋ZHI6(IwEh34zzMc7):// HU7177,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="9penzi.webp" style="width:40%" />
+            <div class="taobao"><span>5覆👋ZHI6(IwEh34zzMc7):// HU7177,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>作为可以放在架子上的收纳，更推荐以下两种</b></div>
             <div style="font-size:1.2em; "><b>xhs@慧慧为什么推荐(推荐理由：比较小巧，方便分类收纳，一个35方格可以放两个，比较矮有空位，方便宝贝自己拿取）</b></div>
-            <img src="9shouna3.webp" style="display:inline-block;width:50%"/>
-            <img src="9shouna4.webp" style="display:inline-block;width:50%"/>
-            <div class="taobao"><span>9Fu😊zhi6(YJCN34zxkAJ):// MU6304,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="9shouna3.webp" style="display:inline-block;width:50%" />
+            <img src="9shouna4.webp" style="display:inline-block;width:50%" />
+            <div class="taobao"><span>9Fu😊zhi6(YJCN34zxkAJ):// MU6304,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.2em; "><b>推荐理由：尺寸比较严丝合缝，适合放需要防尘的物件，比如玩偶</b></div>
-            <img src="9shouna5.webp" style="width:40%"/>
-            <img src="9shouna2.webp" style="width:40%"/>
-            <div class="taobao"><span>8覆👋ZHI1(mbV234zCyXZ):// CZ3457,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="9shouna5.webp" style="width:40%" />
+            <img src="9shouna2.webp" style="width:40%" />
+            <div class="taobao"><span>8覆👋ZHI1(mbV234zCyXZ):// CZ3457,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab9-->
+
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>扎带</b></div>
             <div style="font-size:1.2em; "><b>尺寸请选择8x350x400 经典色请选择深蓝色/红色/黄色/绿色</b></div>
-            <img src="10zhadai.webp" style="width:40%"/>
-            <div class="taobao"><span>8fu😄質1(2kQj34zE72x):// MF3135,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="10zhadai.webp" style="width:40%" />
+            <div class="taobao"><span>8fu😄質1(2kQj34zE72x):// MF3135,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>玻璃蜡笔</b></div>
             <div style="font-size:1.2em;"><b>在亚克力板上显色较为清楚，容易擦洗</b></div>
-            <img src="10bi.webp" style="display:inline-block;width:40%"/>
-            <img src="10bi2.webp" style="display:inline-block;width:40%"/>
-            <div class="taobao"><span>3覆👋ZHI8(vNYy34zDP3E):// MU6304,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="10bi.webp" style="display:inline-block;width:40%" />
+            <img src="10bi2.webp" style="display:inline-block;width:40%" />
+            <div class="taobao"><span>3覆👋ZHI8(vNYy34zDP3E):// MU6304,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab10-->
+
         <div class="tab-page">
             <div style="font-size:1.2em; "><b>请联系客服选择外径27mm,长度为78cm的铝管，4根是60元，6根是58元</b></div>
-            <img src="11lvguan.webp" style="width:40%"/>
-            <div class="taobao"><span>0Fu😊zhi7(NAfW34zwnUZ):// CA1831,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="11lvguan.webp" style="width:40%" />
+            <div class="taobao"><span>0Fu😊zhi7(NAfW34zwnUZ):// CA1831,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab11-->
+
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>金属洞洞板</b></div>
             <div style="font-size:1.2em; "><b>推荐用心在做产品的两个姐妹，她们的洞洞板各有千秋，大家根据自己的需求选择<br>羊毛厂会不定时组织团购活动，欢迎进群！</b></div>
             <br>
-            <div style="font-size:1.2em; ">1|吉祥如意小裁缝|<br>特点是圆形通用孔洞、细磨砂质地、和Quadro大板尺寸完全一致可以严丝合缝链接、对边固定空洞、面板大螺丝固定、整体相对轻便。</div>
-            <img src="12dongdongban5.webp" style="width:40%"/>
-            <div class="taobao"><span>https://m.tb.cn/h.gncFHcL?tk=uhYx3fMk5OK HU904</span><br/><button onclick="clip(this)">复制链接，粘贴到浏览器地址栏打开</button></div>
+            <div style="font-size:1.2em; ">1|吉祥如意小裁缝|<br>特点是圆形通用孔洞、细磨砂质地、和Quadro大板尺寸完全一致可以严丝合缝链接、对边固定空洞、面板大螺丝固定、整体相对轻便。
+            </div>
+            <img src="12dongdongban5.webp" style="width:40%" />
+            <div class="taobao"><span>https://m.tb.cn/h.gncFHcL?tk=uhYx3fMk5OK HU904</span><br /><button
+                    onclick="clip(this)">复制链接，粘贴到浏览器地址栏打开</button></div>
             <br>
             <br>
             <div style="font-size:1.2em; ">|哎哟妈呀|<br>特点是宜家长孔、光面、适配Quadro及所有国产、四边固定孔洞、面板大螺丝固定、板面比较厚实。</div>
-            <img src="12dongdongban4.webp" style="width:45%"/>
-            <div class="taobao"><span>https://m.tb.cn/h.gnXYrbem9C0XWan?tk=hIoZ3fMHeFY MF3543 </span><br/><button onclick="clip(this)">复制链接，粘贴到浏览器地址栏打开</button></div>
+            <img src="12dongdongban4.webp" style="width:45%" />
+            <div class="taobao"><span>https://m.tb.cn/h.gnXYrbem9C0XWan?tk=hIoZ3fMHeFY MF3543 </span><br /><button
+                    onclick="clip(this)">复制链接，粘贴到浏览器地址栏打开</button></div>
             <br>
-            <br>            
+            <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>洞洞板周边配件</b></div>
             <div style="font-size:1.2em; "><b>适配|吉祥如意小裁缝|洞洞板的配件</b></div>
-            <img src="12pj1.webp" style="display:inline-block;width:18%"/>
-            <img src="12pj2.webp" style="display:inline-block;width:18%"/>
-            <div class="taobao"><span>8覆👋ZHI9(3uWb3UNtYCg):// ZH9102,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="12pj1.webp" style="display:inline-block;width:18%" />
+            <img src="12pj2.webp" style="display:inline-block;width:18%" />
+            <div class="taobao"><span>8覆👋ZHI9(3uWb3UNtYCg):// ZH9102,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.2em; "><b>适配|哎哟妈呀|洞洞板的配件</b></div>
-            <img src="12pj3.webp" style="width:40%"/>
-            <div class="taobao"><span>8輹👋Zhi4(i4yx3UNtLoD):// CA1371,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="12pj3.webp" style="width:40%" />
+            <div class="taobao"><span>8輹👋Zhi4(i4yx3UNtLoD):// CA1371,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.2em; "><b>木质磁性字母贴，需要自己把磁条贴上，但很简单</b></div>
-            <img src="12dongdongban1.webp" style="width:40%"/>
-            <div class="taobao"><span>1輹👋Zhi7(MHp634zwQ3o):// CA1710,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="12dongdongban1.webp" style="width:40%" />
+            <div class="taobao"><span>1輹👋Zhi7(MHp634zwQ3o):// CA1710,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.2em; "><b>吸力比较好的小可爱磁铁</b></div>
-            <img src="12dongdongban3.webp" style="width:40%"/>
-            <div class="taobao"><span>6fu😄質9(b6Xe34zEnw5):// MU5183,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="12dongdongban3.webp" style="width:40%" />
+            <div class="taobao"><span>6fu😄質9(b6Xe34zEnw5):// MU5183,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
-             <div style="font-size:1.2em; "><b>车辆磁力贴，崽崽很喜欢，但单词翻译不是很完美</b></div>
-            <img src="12dongdongban2.webp" style="width:40%"/>
-            <div class="taobao"><span>7覆👋ZHI6(6nrQ34zEg8H):// HU7177,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <div style="font-size:1.2em; "><b>车辆磁力贴，崽崽很喜欢，但单词翻译不是很完美</b></div>
+            <img src="12dongdongban2.webp" style="width:40%" />
+            <div class="taobao"><span>7覆👋ZHI6(6nrQ34zEg8H):// HU7177,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
-         <!--end of tab12-->   
+        <!--end of tab12-->
+
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>纯棉地毯</b></div>
             <div style="font-size:1.2em; "><b>可以进洗衣机清洗，可以彻底清洁，好收纳，但缓冲相对差一些</b></div>
-            <img src="13ditan1.webp" style="width:40%"/>
-            <div class="taobao"><span>4fu😄質8(APN534ztrjo):// CA1371,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="13ditan1.webp" style="width:40%" />
+            <div class="taobao"><span>4fu😄質8(APN534ztrjo):// CA1371,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
-            <br>          
+            <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>曼龙地垫</b></div>
             <div style="font-size:1.2em; "><b>弹性很好，方便清洁，适合小娃，但不是很好收纳</b></div>
-            <img src="13ditan2.webp" style="width:40%"/>
+            <img src="13ditan2.webp" style="width:40%" />
             <div style="font-size:1.2em; "><b>羊毛厂快团团价格更加美丽，别错过</b></div>
-            <div class="taobao"><span>6覆👋ZHI5(N80334ztJ3F):// MF3084,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <div class="taobao"><span>6覆👋ZHI5(N80334ztJ3F):// MF3084,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
             <br>
             <br>
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>东理地毯</b></div>
             <div style="font-size:1.2em; "><b>颜值很高可以随意拼装，较好收纳，但打理相较前两种比较困难</b></div>
-            <img src="13ditan3.webp" style="width:40%"/>
-            <div class="taobao"><span>4fu😄質null MF3084,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <img src="13ditan3.webp" style="width:40%" />
+            <div class="taobao"><span>4fu😄質null MF3084,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
-         <!--end of tab13-->  
+        <!--end of tab13-->
+
         <div class="tab-page">
-             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>攀爬架收纳</b></div>
-            <div style="font-size:1.2em; "><b>1）驯兽师使用尿不湿的箱子进行收纳的，费用为0. <br>2）可以用架子收纳自己也非常好装<br>xhs@王大哥推荐下面这个软性收纳，尺寸正好合适（#150，50*35*46cm），装接头的时候要稍微注意一下，有划破的可能，没有1688也可以淘宝上购买同牌同款但稍微贵一些</b></div>
-            <img src="14shouna.webp" style="width:40%"/>
-            <a href="https://mindx.1688.com/tj/tuijian/2jdfz4NJxBEbxXWjFXZA/index.html?share_token=dey7B03ThDgne6N4GF+wETRQMYBzlFkuvqQSjBAMlf0C6nAi3fjXBw==&wh_pha=true&wh_pid=2794304&__pageId__=2794304&__existtitle__=1&awake_id=110&businessId=802636054650&__share_id=dd70a38f-ced4-4e75-a817-443ee42d00c7&currentPage=WAP_OFFER_DETAIL&__zhi_token=YaIMvma00rNaa&spm=a262eq.8992535/20240813.5103953.0&__removesafearea__=1&cbu_sv_id=17cd0ebd-d58c-486a-b058-9cdfd77628d0&visitorId=17cd0ebd-d58c-486a-b058-9cdfd77628d0&isVisited=true" target="_blank">
-               <span style="text-decoration:underline;font-size:1.8em;">点击打开1688链接</span>
+            <div style="font-size:1.5em; color:rgb(112,173,71)"><b>攀爬架收纳</b></div>
+            <div style="font-size:1.2em; "><b>1）驯兽师使用尿不湿的箱子进行收纳的，费用为0.
+                    <br>2）可以用架子收纳自己也非常好装<br>xhs@王大哥推荐下面这个软性收纳，尺寸正好合适（#150，50*35*46cm），装接头的时候要稍微注意一下，有划破的可能，没有1688也可以淘宝上购买同牌同款但稍微贵一些</b>
+            </div>
+            <img src="14shouna.webp" style="width:40%" />
+            <a href="https://mindx.1688.com/tj/tuijian/2jdfz4NJxBEbxXWjFXZA/index.html?share_token=dey7B03ThDgne6N4GF+wETRQMYBzlFkuvqQSjBAMlf0C6nAi3fjXBw==&wh_pha=true&wh_pid=2794304&__pageId__=2794304&__existtitle__=1&awake_id=110&businessId=802636054650&__share_id=dd70a38f-ced4-4e75-a817-443ee42d00c7&currentPage=WAP_OFFER_DETAIL&__zhi_token=YaIMvma00rNaa&spm=a262eq.8992535/20240813.5103953.0&__removesafearea__=1&cbu_sv_id=17cd0ebd-d58c-486a-b058-9cdfd77628d0&visitorId=17cd0ebd-d58c-486a-b058-9cdfd77628d0&isVisited=true"
+                target="_blank">
+                <span style="text-decoration:underline;font-size:1.8em;">点击打开1688链接</span>
             </a>
-             <br>
-            <div class="taobao"><span>7輹👋Zhi9(e6Lm3ermS8Z):// ZH9102,打開/</span><br/><button onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
+            <br>
+            <div class="taobao"><span>7輹👋Zhi9(e6Lm3ermS8Z):// ZH9102,打開/</span><br /><button
+                    onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
         <!--end of tab14-->
+
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>原创作者xhs@娜娜和宝平欧巴的彩虹门</b></div>
             <div style="font-size:1.2em; "><b>是非常受欢迎的一款周边单品。不想自己动手做的小伙伴可以直接入！<br>羊毛厂也争取到了一点点小福利，入群有详情。</b></div>
-            <img src="15rainbow3.webp" style="display:inline-block;width:18%"/>
-            <img src="15rainbow1.webp" style="display:inline-block;width:18%"/>
-            <img src="15rainbow4.webp" style="display:inline-block;width:18%"/>
-            <img src="15rainbow2.webp" style="display:inline-block;width:18%"/>
-            <img src="15rainbow5.webp" style="display:inline-block;width:18%"/>
+            <img src="15rainbow3.webp" style="display:inline-block;width:18%" />
+            <img src="15rainbow1.webp" style="display:inline-block;width:18%" />
+            <img src="15rainbow4.webp" style="display:inline-block;width:18%" />
+            <img src="15rainbow2.webp" style="display:inline-block;width:18%" />
+            <img src="15rainbow5.webp" style="display:inline-block;width:18%" />
             <br>
-            <a href="https://www.xiaohongshu.com/goods-detail/663bb5fbd0faa80001b3dd95?instation_link=xhsdiscover%3A%2F%2Fgoods_detail%2F663bb5fbd0faa80001b3dd95%3Ftrade_ext%3DeyJjaGFubmVsSW5mbyI6bnVsbCwiZHNUb2tlbkluZm8iOm51bGwsInNoYXJlTGluayI6Imh0dHBzOi8vd3d3LnhpYW9ob25nc2h1LmNvbS9nb29kcy1kZXRhaWwvNjYzYmI1ZmJkMGZhYTgwMDAxYjNkZDk1P2FwcHVpZD01Y2E2NzA2ZDAwMDAwMDAwMTcwMTI5MDciLCJsaXZlSW5mbyI6bnVsbCwic2hvcEluZm8iOm51bGwsImdvb2RzTm90ZUluZm8iOm51bGx9%26rn%3Dtrue&xhsshare=CopyLink&appuid=5ca6706d0000000017012907&apptime=1723708760" target="_blank">
-            <span style="text-decoration:underline;font-size:1.8em;">点击打开小红书购买链接</span>
+            <a href="https://www.xiaohongshu.com/goods-detail/663bb5fbd0faa80001b3dd95?instation_link=xhsdiscover%3A%2F%2Fgoods_detail%2F663bb5fbd0faa80001b3dd95%3Ftrade_ext%3DeyJjaGFubmVsSW5mbyI6bnVsbCwiZHNUb2tlbkluZm8iOm51bGwsInNoYXJlTGluayI6Imh0dHBzOi8vd3d3LnhpYW9ob25nc2h1LmNvbS9nb29kcy1kZXRhaWwvNjYzYmI1ZmJkMGZhYTgwMDAxYjNkZDk1P2FwcHVpZD01Y2E2NzA2ZDAwMDAwMDAwMTcwMTI5MDciLCJsaXZlSW5mbyI6bnVsbCwic2hvcEluZm8iOm51bGwsImdvb2RzTm90ZUluZm8iOm51bGx9%26rn%3Dtrue&xhsshare=CopyLink&appuid=5ca6706d0000000017012907&apptime=1723708760"
+                target="_blank">
+                <span style="text-decoration:underline;font-size:1.8em;">点击打开小红书购买链接</span>
             </a>
             <hr>
             <p>入群欢享“驯兽师羊毛厂”专属附加福利</p>
-            <img src="4weixin.webp" style="display:inline-block;width:30%"/>
-            <img src="1weixinqun.webp" style="display:inline-block;width:30%"/>
+            <img src="4weixin.webp" style="display:inline-block;width:30%" />
+            <img src="1weixinqun.webp" style="display:inline-block;width:30%" />
         </div>
         <!--end of tab15-->
-
         
     </div>
-        
-   
 </body>
 
 </html>
