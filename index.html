@@ -96,10 +96,10 @@
         }
     </style>
     <script>
-        if (window.addEventListener) {
-            document.addEventListener('DOMContentLoaded', main);
-        } else if (window.attachEvent) {
-            document.attachEvent('onDOMContentLoaded', main);
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", main);
+        } else {
+          main();
         }
 
         function main() {
@@ -109,6 +109,12 @@
                 minimal();
             } else {
                 document.getElementById('qrcodewx').style.display = 'block';
+            }
+            const tabBtns = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].onclick = function() {
+                    showTab(i);
+                };
             }
         }
 
@@ -191,23 +197,24 @@
         <img src="logo.webp" style="width:60%" />
     </div>
     <div class="tab-btn-area">
-        <div class="tab-btn active" onclick="showTab(0)">选品01<br>德国原版quadro</div>
-        <div class="tab-btn" onclick="showTab(1)">选品02<br>国产元老世纪童年</div>
-        <div class="tab-btn" onclick="showTab(2)">选品03<br>国产过河石</div>
-        <div class="tab-btn" onclick="showTab(3)">选品04<br>吊环</div>
-        <div class="tab-btn" onclick="showTab(4)">选品05<br>绳网</div>
-        <div class="tab-btn" onclick="showTab(5)">选品06<br>布套及相关</div>
-        <div class="tab-btn" onclick="showTab(6)">选品07<br>秋千</div>
-        <div class="tab-btn" onclick="showTab(7)">选品08<br>大颗粒积木板</div>
-        <div class="tab-btn" onclick="showTab(8)">选品09<br>游戏/收纳盒</div>
-        <div class="tab-btn" onclick="showTab(9)">选品10<br>亚克力相关</div>
-        <div class="tab-btn" onclick="showTab(10)">选品11<br>铝管/堵头</div>
-        <div class="tab-btn" onclick="showTab(11)">选品12<br>金属洞洞板</div>
-        <div class="tab-btn" onclick="showTab(12)">选品13<br>地垫</div>
-        <div class="tab-btn" onclick="showTab(13)">选品14<br>配件收纳</div>
-        <div class="tab-btn" onclick="showTab(14)">选品15<br>彩虹门</div>
-        <div class="tab-btn" onclick="showTab(15)">选品16<br>感官垫</div>
-        <div class="tab-btn" onclick="showTab(16)">更多...<br>其他好物分享</div>
+        <div class="tab-btn active">选品01<br>德国原版quadro</div>
+        <div class="tab-btn">选品02<br>国产元老世纪童年</div>
+        <div class="tab-btn">选品03<br>mini quadro</div>
+        <div class="tab-btn">选品04<br>国产过河石</div>
+        <div class="tab-btn">选品05<br>吊环</div>
+        <div class="tab-btn">选品06<br>绳网</div>
+        <div class="tab-btn">选品07<br>布套及相关</div>
+        <div class="tab-btn">选品08<br>秋千</div>
+        <div class="tab-btn">选品09<br>大颗粒积木板</div>
+        <div class="tab-btn">选品10<br>游戏/收纳盒</div>
+        <div class="tab-btn">选品11<br>亚克力相关</div>
+        <div class="tab-btn">选品12<br>铝管/堵头</div>
+        <div class="tab-btn">选品13<br>金属洞洞板</div>
+        <div class="tab-btn">选品14<br>地垫</div>
+        <div class="tab-btn">选品15<br>配件收纳</div>
+        <div class="tab-btn">选品16<br>彩虹门</div>
+        <div class="tab-btn">选品17<br>感官垫</div>
+        <div class="tab-btn">更多...<br>其他好物分享</div>
     </div>
     <div class="tab-page-area">
         <div class="tab-page active">
@@ -265,12 +272,21 @@
         <!--end of tab2-->
 
         <div class="tab-page">
-            <div style="font-size:1.2em; "><b>玩法非常多样可以和爬架搭配使用，更推荐在室外玩！如果需要原版Staplestein玩法说明可以私信驯兽师</b></div>
-            <img src="3shi.webp" style="width:50%" />
-            <div class="taobao"><span>MLSYeRf褚负治9021128</span><br /><button
+            <div style="font-size:1.2em; "><b>🔥 为何要选择艾亚Mini搭搭乐？ 曾经风靡一时的Mini Quadro已停产多年，想买原版的只能靠运气，价格还高不说，二手的状态往往不太理想……😓<br>
+但好消息来了！经过4392小时的精心研发，艾亚Mini搭搭乐终于成功复刻经典！✨ 新版2.0配件更全，管子接头与原版完美适配，使用体验比二手原版更稳定，松紧误差极小，打造更好的拼搭感！🔧</b></div>
+            <img src="3mini.webp" style="width:50%" />
+            <div class="taobao"><span>MXIvuqB楚荀鲁预344021</span><br /><button
                     onclick="clip(this)">复制快团团口令，粘贴至快团团搜索栏搜索商品</button></div>  
         </div>
         <!--end of tab3-->
+        
+        <div class="tab-page">
+            <div style="font-size:1.2em; "><b>玩法非常多样可以和爬架搭配使用，更推荐在室外玩！如果需要原版Staplestein玩法说明可以私信驯兽师</b></div>
+            <img src="3shi.webp" style="width:50%" />
+            <div class="taobao"><span>ZZziMiz万金倒日463722</span><br /><button
+                    onclick="clip(this)">复制快团团口令，粘贴至快团团搜索栏搜索商品</button></div>  
+        </div>
+        <!--end of tab4-->
 
         <div class="tab-page">
             <div style="font-size:1.2em; "><b>可以让单杠旋转起来很好玩，也适合抓握力一般的崽崽过度，绳子还可以用在别的元素上<br>请选择1m可调节款</b></div>
@@ -278,7 +294,7 @@
             <div class="taobao"><span>7(OW8Q3K9NODJ):// CZ6135</span><br /><button
                     onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
-        <!--end of tab4-->
+        <!--end of tab5-->
 
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>八字环平替魔术贴</b></div>
@@ -318,7 +334,7 @@
             <div class="taobao"><span>9(V3u33K9pA4r):// MU6304</span><br /><button
                     onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
-        <!--end of tab5-->
+        <!--end of tab6-->
 
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>布艺</b></div>
@@ -331,7 +347,7 @@
             <div class="taobao"><span>lMUTXYI符殷合0599536</span><br /><button
                     onclick="clip(this)">复制快团团口令，粘贴至快团团搜索栏搜索商品</button></div>
         </div>
-        <!--end of tab6-->
+        <!--end of tab7-->
 
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>软秋千</b></div>
@@ -354,7 +370,7 @@
             <div class="taobao"><span>9(sNF43K9vMUO):// MF3135</span><br /><button
                     onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
-        <!--end of tab7-->
+        <!--end of tab8-->
 
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>Lego原版底板</b></div>
@@ -369,7 +385,7 @@
             <div class="taobao"><span>1(04gl3K9z6j6):// ZH9114</span><br /><button
                     onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
-        <!--end of tab8-->
+        <!--end of tab9-->
 
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>适配方形箱子</b></div>
@@ -400,7 +416,7 @@
             <div class="taobao"><span>7(EFIv3Kk0S1q):// HU7709</span><br /><button
                     onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
-        <!--end of tab9-->
+        <!--end of tab10-->
 
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>亚克力板</b></div>
@@ -413,7 +429,7 @@
             <div class="taobao"><span>2(2Edh3Kk0Rme):// MF3106</span><br /><button
                     onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
-        <!--end of tab10-->
+        <!--end of tab11-->
 
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>铝管</b></div>
@@ -446,7 +462,7 @@
             
             
         </div>
-        <!--end of tab11-->
+        <!--end of tab12-->
 
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>金属洞洞板</b></div>
@@ -490,7 +506,7 @@
             <div class="taobao"><span>0(3YO53leArLZ):// ZH9102</span><br /><button
                     onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
-        <!--end of tab12-->
+        <!--end of tab13-->
 
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>曼龙地垫</b></div>
@@ -514,7 +530,7 @@
             <div class="taobao"><span>7(QWLC3KkWX0Z):// MF1001</span><br /><button
                     onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
-        <!--end of tab13-->
+        <!--end of tab14-->
 
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>攀爬架收纳</b></div>
@@ -527,7 +543,7 @@
                 <span style="text-decoration:underline;font-size:1.8em;">点击打开1688链接</span>
             </a>
         </div>
-        <!--end of tab14-->
+        <!--end of tab15-->
 
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>彩虹门</b></div>
@@ -542,7 +558,8 @@
             <p>入群欢享“驯兽师羊毛厂”专属附加福利</p>
             <img src="4weixin.webp" style="display:inline-block;width:30%" />
         </div>
-        <!--end of tab15-->
+        <!--end of tab16-->
+        
                 <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>感官垫</b></div>
             <div style="font-size:1.2em; "><b>适配攀爬架也可以单独放在地上玩。5厘米高处可以直接放置，超过5厘米建议放在安装的大板上不要单独使用。使用感官垫后表面会相对硬一些，但大人坐在上面更有安全感。</b>
@@ -553,7 +570,8 @@
                 <span style="text-decoration:underline;font-size:1.8em;">点击打开快团团链接</span>
             </a>
         </div>
-        <!--end of tab16-->
+        <!--end of tab17-->
+        
         <div class="tab-page">
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>小泰克厨房三大金刚</b></div>
             <div style="font-size:1.2em; "><b>xhs@慧慧为什么推荐：很仿真宝贝很喜欢</b></div>
@@ -584,7 +602,7 @@
             <div class="taobao"><span>3(CgVX38dUlUp):// HU7177</span><br /><button
                     onclick="clip(this)">复制淘口令，打开淘宝App查看商品</button></div>
         </div>
-        <!--end of tab17-->
+        <!--end of tab18-->
 
     </div>
 </body>
