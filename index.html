@@ -134,7 +134,7 @@
                         const imgs = tabPages[i].getElementsByTagName('img');
                         for(let j = 0; j < imgs.length; j++){
                           if(imgs[j].getAttribute('src') == ''){
-                            imgs[j].setAttribute('src',imgs[j].getAttribute('data-src'));
+                            imgs[j].src = imgs[j].getAttribute('data-src');
                           }
                         }
                     }
