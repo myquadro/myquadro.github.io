@@ -133,7 +133,7 @@
                         tabPages[i].classList.add('active');
                         const imgs = tabPages[i].getElementsByTagName('img');
                         for(let j = 0; j < imgs.length; j++){
-                          if(imgs[j].getAttribute('src') == ''){
+                          if(!imgs[j].src){
                             imgs[j].src = imgs[j].getAttribute('data-src');
                           }
                         }
