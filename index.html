@@ -131,6 +131,12 @@
                     if (!tabBtns[i].classList.contains('active')) {
                         tabBtns[i].classList.add('active');
                         tabPages[i].classList.add('active');
+                        const imgs = tabPages[i].getElementsByTagName('img');
+                        for(let j = 0; j < imgs.length; j++){
+                          if(imgs[j].getAttribute('src') == ''){
+                            imgs[j].setAttribute('src',imgs[j].getAttribute('data-src'));
+                          }
+                        }
                     }
                 }
             }
@@ -257,26 +263,26 @@
             <div style="font-size:1.5em; color:rgb(112,173,71)"><b>羊毛厂优惠</b></div>
                 <b>DIY中的B1套装很不错，优惠力度很好，适合新手入门。</b>
             <div style="font-size:1.2em; "><b> 常规套装和其他DIY套装有满送活动，详情请见羊毛厂快团团</b></div>
-            <img src="2ktt.webp" style="width:50%" />
+            <img data-src="2ktt.webp" style="width:50%" />
             <hr>
             <p>入群|驯兽师羊毛厂|获得更多交流和搭建指引</p>
-            <img src="4weixin.webp" style="display:inline-block;width:30%" />
+            <img data-src="4weixin.webp" style="display:inline-block;width:30%" />
         </div>
         <!--end of tab2-->
 
         <div class="tab-page">
             <div style="font-size:1.2em; "><b>澳洲CONNETIX</b></div>
-            <img src="3cili (0).webp" style="width:50%" />
+            <img data-src="3cili (0).webp" style="width:50%" />
             <div style="font-size:1.2em; "><b>高性价比DUDUBAO</b></div>
-            <img src="3cili (01).webp" style="width:50%" />
+            <img data-src="3cili (01).webp" style="width:50%" />
             <div style="font-size:1.2em; "><b>与众不同的Totstuff</b></div>
-            <img src="3cili (02).webp" style="width:50%" />
+            <img data-src="3cili (02).webp" style="width:50%" />
             <div style="font-size:1.2em; "><b>今聚MNTL</b></div>
-            <img src="3cili (3).webp" style="width:50%" />
+            <img data-src="3cili (3).webp" style="width:50%" />
             <div style="font-size:1.2em; "><b>Giromag</b></div>
-            <img src="3cili (2).webp" style="width:50%" />
+            <img data-src="3cili (2).webp" style="width:50%" />
             <div style="font-size:1.2em; "><b>Mideer</b></div>
-            <img src="3cili (1).webp" style="width:50%" />
+            <img data-src="3cili (1).webp" style="width:50%" />
         </div>
         <!--end of tab3-->
         
