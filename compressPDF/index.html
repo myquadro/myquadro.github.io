@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF 压缩工具</title>
+    <script src="pdf.min.js"></script>
+</head>
+<body>
+    <h2>PDF 压缩工具</h2>
+    <input type="file" id="pdfInput" accept="application/pdf">
+    <button onclick="compressPDF()">压缩 PDF</button>
+    <p id="status"></p>
+    <a id="downloadLink" style="display: none;">下载压缩后的 PDF</a>
+    <canvas id="pdfCanvas" style="display: none;"></canvas>
+    
+    <script>
+        async function compressPDF() {
+            const input = document.getElementById('pdfInput');
+            const file = input.files[0];
+            if (!file) {
+                alert('请选择一个 PDF 文件');
+                return;
+            }
+            
+            const fileReader = new FileReader();
+            fileReader.readAsArrayBuffer(file);
+            fileReader.onload = async function() {
+                const pdfData = new Uint8Array(fileReader.result);
+                const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
+                const pdfDoc = await PDFLib.PDFDocument.create();
+                const canvas = document.getElementById('pdfCanvas');
+                const ctx = canvas.getContext('2d');
+
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const viewport = page.getViewport({ scale: 0.5 }); // 降低缩放比例以压缩
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+                    
+                    const renderContext = {
+                        canvasContext: ctx,
+                        viewport: viewport
+                    };
+                    await page.render(renderContext).promise;
+                    
+                    const imageBytes = canvas.toDataURL('image/jpeg', 0.7); // 质量降低至 70%
+                    const pdfImage = await pdfDoc.embedJpg(imageBytes);
+                    const newPage = pdfDoc.addPage([viewport.width, viewport.height]);
+                    newPage.drawImage(pdfImage, { x: 0, y: 0, width: viewport.width, height: viewport.height });
+                }
+
+                const compressedPdfBytes = await pdfDoc.save();
+                const blob = new Blob([compressedPdfBytes], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+                const downloadLink = document.getElementById('downloadLink');
+                downloadLink.href = url;
+                downloadLink.download = 'compressed.pdf';
+                downloadLink.style.display = 'block';
+                downloadLink.innerText = '下载压缩后的 PDF';
+                document.getElementById('status').innerText = '压缩完成';
+            };
+        }
+    </script>
+</body>
+</html>
