@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图片压缩及格式转换</title>
+  <script>
+    var maxWidth;
+    var maxHeight;
+    var maxKb;
+    var format = 'image/webp';
+    var extension = '.webp';
+    function convert_download() {
+      file = files[0];
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = new Image();
+        img.crossOrigin = 'Anonymous';
+        img.src = e.target.result;
+        img.onload = function () {
+          let width = img.width;
+          let height = img.height;
+          const quality = 0.5;
+
+          if (maxWidth !== null && maxWidth > 0 && width > maxWidth) {
+            height = Math.round(height * (maxWidth / width));
+            width = maxWidth;
+          }
+          if (maxHeight !== null && maxHeight > 0 && height > maxHeight) {
+            width = Math.round(width * (maxHeight / height));
+            height = maxHeight;
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          canvas.toBlob(function (blob) {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = file.name.replace(/\.[^/.]+$/, "") + extension;
+            a.click();
+          }, format, quality);
+        }
+      }
+      reader.readAsDataURL(file);
+    }
+
+    function main() {
+      const input = document.getElementById('imageInput');
+      const maxWidthInput = document.getElementById('maxWidth');
+      const maxHeightInput = document.getElementById('maxHeight');
+      const maxKbInput = document.getElementById('maxKb');
+      maxWidth = maxWidthInput.value ? parseInt(maxWidthInput.value) : null;
+      maxHeight = maxHeightInput.value ? parseInt(maxHeightInput.value) : null;
+      //maxKb = maxKbInput.value ? parseInt(maxKbInput.value) : null;
+
+      if (!input.files || input.files.length <= 0) {
+        alert('请先选择文件');
+      }
+
+      const formatElm = document.getElementById('format');
+      if (formatElm.value == 'jpg') {
+        format = 'image/jpeg';
+        extension = '.jpg';
+      } else {
+        format = 'image/' + formatElm.value;
+        extension = '.' + formatElm.value;
+      }
+      files = Array.from(input.files);
+      convert_download();
+    }
+
+  </script>
+</head>
+
+<body>
+  <a href="https://myquadro.github.io/">返回羊毛厂</a><br>
+  <h2>图片压缩及格式转换</h2>
+  目标宽度：(像素)
+  <input type="number" id="maxWidth">
+  目标高度：(像素)
+  <input type="number" id="maxHeight"><br><br>
+  <!--目标大小：(kB)
+  <input type="number" id="maxKb"><br><br>-->
+  目标格式：
+  <select id="format">
+    <option value="jpg">jpg</option>
+    <option value="webp">webp</option>
+    <option value="png">png</option>
+  </select>
+  <hr>
+
+  <input type="file" id="imageInput" accept="image/*">
+  <button onclick="main()">处理图片并下载</button>
+
+
+</body>
+
+</html>
