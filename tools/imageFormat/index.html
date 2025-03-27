@@ -4,15 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>图片压缩及格式转换</title>
+  <title>图片批量压缩及格式转换</title>
   <script>
     var maxWidth;
     var maxHeight;
     var maxKb;
     var format = 'image/webp';
     var extension = '.webp';
-    function convert_download() {
-      file = files[0];
+    const delay = 300; // 延迟时间，单位为毫秒
+    function convert_download(index) {
+      file = files[index];
       const reader = new FileReader();
       reader.onload = function (e) {
         const img = new Image();
@@ -42,6 +43,12 @@
             a.href = URL.createObjectURL(blob);
             a.download = file.name.replace(/\.[^/.]+$/, "") + extension;
             a.click();
+            index++;
+            if (index < files.length) {
+              setTimeout(() => {
+                convert_download(index);
+              }, delay);
+            }
           }, format, quality);
         }
       }
@@ -70,7 +77,7 @@
         extension = '.' + formatElm.value;
       }
       files = Array.from(input.files);
-      convert_download();
+      convert_download(0);
     }
 
   </script>
@@ -93,7 +100,7 @@
   </select>
   <hr>
 
-  <input type="file" id="imageInput" accept="image/*">
+  <input type="file" id="imageInput" accept="image/*" multiple>
   <button onclick="main()">处理图片并下载</button>
 
 
